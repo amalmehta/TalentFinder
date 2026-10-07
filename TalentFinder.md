@@ -55,6 +55,7 @@ Asked and answered (2026-10-06):
 - Scoring: local and rule-based, with no AI and no network.
 - Survey length: 60 questions, about 10–15 minutes, with save and resume.
 - Scope this session: the native Mac app plus local git. The GitHub push and the website are proposals for later.
+- 2026-10-07: asked to push to GitHub. Pushed to a private repo, amalmehta/TalentFinder.
 
 Decided without asking:
 - SwiftUI, macOS 14+, with the core logic in a separate Swift package (TalentFinderCore) so it can be tested with `swift test`.
@@ -65,7 +66,6 @@ Decided without asking:
 - Data is saved as JSON in ~/Library/Application Support/TalentFinder.
 
 Proposals (not done):
-- Create a GitHub repo named TalentFinder and push.
 - A website version, as its own step.
 - Result history and comparison over time.
 - Exporting results to PDF or Markdown.
@@ -91,3 +91,4 @@ CHANGELOG:
 - 2026-10-02 — added meta-instruction: every project has a system design doc at docs/SYSTEM-DESIGN.md
 - 2026-10-05 — added meta-instruction: applications include a settings button or tab
 - 2026-10-06 — built v1 of the Mac app (60-question survey, ten aptitudes, activity matches, Settings, feedback tab), with tests, docs and screenshots
+- 2026-10-07 — pushed to GitHub as a private repo: https://github.com/amalmehta/TalentFinder
