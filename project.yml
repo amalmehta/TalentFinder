@@ -1,0 +1,28 @@
+name: TalentFinder
+options:
+  bundleIdPrefix: com.amalmehta
+  deploymentTarget:
+    macOS: "14.0"
+packages:
+  TalentFinderCore:
+    path: .
+targets:
+  TalentFinder:
+    type: application
+    platform: macOS
+    sources: [App]
+    dependencies:
+      - package: TalentFinderCore
+    settings:
+      base:
+        PRODUCT_NAME: TalentFinder
+        PRODUCT_BUNDLE_IDENTIFIER: com.amalmehta.TalentFinder
+        MARKETING_VERSION: "1.0"
+        CURRENT_PROJECT_VERSION: "1"
+        SWIFT_VERSION: "5.0"
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: TalentFinder
+        INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.lifestyle
+        CODE_SIGN_IDENTITY: "-"
+        CODE_SIGN_STYLE: Manual
+        ENABLE_HARDENED_RUNTIME: NO

@@ -1,0 +1,68 @@
+# Instructions
+
+## What you need
+
+- macOS 14 (Sonoma) or later
+- Xcode 16 or later (built and tested with Xcode 26.5)
+- Optional: [XcodeGen](https://github.com/yonaskolb/XcodeGen), only if you change `project.yml`
+
+## Build and run
+
+Open `TalentFinder.xcodeproj` in Xcode and press ⌘R. Or build from the terminal:
+
+```bash
+xcodebuild -project TalentFinder.xcodeproj -scheme TalentFinder -configuration Release -derivedDataPath build build
+```
+
+```bash
+open build/Build/Products/Release/TalentFinder.app
+```
+
+If you edit `project.yml`, regenerate the Xcode project first:
+
+```bash
+xcodegen generate
+```
+
+## Run the tests
+
+The survey, scoring and saving logic is tested as a Swift package:
+
+```bash
+swift test
+```
+
+## Use it
+
+1. **Start Survey** on the welcome screen. There are 60 questions and they take about 10–15 minutes.
+2. Answer each question by clicking or by pressing **1–5** (or **1–4** for "which would you pick" questions). Use **←** and **→** to move between questions. With the default settings, the app moves on after each answer.
+3. Your answers save as you go. Quit whenever you like and choose **Resume Survey** later.
+4. When all 60 are answered, click **See My Results** (or press Return). You'll see:
+   - a chart of your ten aptitude scores (0–100)
+   - your top three strengths, each with the answers that pointed to it
+   - the activities that suit you best, which you can filter by category
+5. **Retake Survey** or **File ▸ New Survey** (⌘N) starts again. A new result replaces the old one.
+
+## Settings (⌘,)
+
+Open with **TalentFinder ▸ Settings…** (⌘,) or the gear button in the toolbar.
+
+| Setting | Default | What it does |
+|---|---|---|
+| Shuffle question order | On | Mixes up the question order for each new survey |
+| Move to the next question after answering | On | Moves on automatically after each answer |
+| Activities to show | 10 | How many activity matches appear in your results |
+| Show in Finder | — | Opens the folder where your data is saved |
+| Reset… | — | Deletes your saved answers and results (feedback is kept) |
+
+## Feedback
+
+Click the small **Feedback** tab in the bottom-right corner, or use **Help ▸ Send Feedback…**. Feedback is saved to `Feedback.json` in the data folder. Nothing is sent anywhere.
+
+## Where your data lives
+
+`~/Library/Application Support/TalentFinder/`
+
+- `Survey In Progress.json`: an unfinished survey
+- `Latest Result.json`: your most recent result
+- `Feedback.json`: the feedback you've written
