@@ -10,12 +10,17 @@ enum Pref {
 
 @Observable @MainActor
 final class AppModel {
-    enum Screen { case welcome, survey, results }
+    enum Screen { case welcome, survey, results, history }
 
     let store: Store
     var screen: Screen = .welcome
     var progress: SurveyProgress?
-    var result: SurveyResult?
+    /// Every completed result, oldest first.
+    var history: [SurveyResult] = []
+    /// The past result being shown on the results screen; nil means the latest.
+    var viewingID: SurveyResult.ID?
+    /// Aptitudes drawn on the Past Results trend chart; nil until first shown.
+    var trendAptitudes: Set<Aptitude>?
     var showingFeedback = false
     var errorMessage: String?
 
@@ -23,8 +28,15 @@ final class AppModel {
         self.store = store
         UserDefaults.standard.register(defaults: [Pref.shuffle: true, Pref.autoAdvance: true, Pref.topCount: 10])
         progress = store.loadProgress()
-        result = store.loadResult()
+        history = store.loadHistory()
     }
+
+    /// The result the results screen shows.
+    var result: SurveyResult? {
+        viewingID.flatMap { id in history.first { $0.id == id } } ?? history.last
+    }
+
+    var isViewingLatest: Bool { result?.id == history.last?.id }
 
     // MARK: Survey
 
@@ -73,20 +85,40 @@ final class AppModel {
 
     func finish() {
         guard let p = progress, p.isComplete else { return }
-        let r = Scorer.score(answers: p.answers)
-        result = r
+        history = ResultHistory.adding(Scorer.score(answers: p.answers), to: history)
+        viewingID = nil
         progress = nil
         do {
-            try store.saveResult(r)
+            try store.saveHistory(history)
             try store.saveProgress(nil)
         } catch { errorMessage = error.localizedDescription }
         screen = .results
     }
 
+    // MARK: History
+
+    func showLatest() {
+        viewingID = nil
+        screen = .results
+    }
+
+    func open(_ r: SurveyResult) {
+        viewingID = r.id
+        screen = .results
+    }
+
+    func delete(_ r: SurveyResult) {
+        history = ResultHistory.removing(r.id, from: history)
+        if viewingID == r.id { viewingID = nil }
+        do { try store.saveHistory(history) } catch { errorMessage = error.localizedDescription }
+        if history.isEmpty { screen = .welcome }
+    }
+
     func resetAll() {
         do { try store.resetSurveyData() } catch { errorMessage = error.localizedDescription }
         progress = nil
-        result = nil
+        history = []
+        viewingID = nil
         screen = .welcome
     }
 

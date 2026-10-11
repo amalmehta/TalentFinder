@@ -37,7 +37,7 @@ swift test
 The website's scorer is checked against the Swift one (needs Node 18 or later):
 
 ```bash
-node --test web/tests/scoring.test.mjs
+node --test web/tests/scoring.test.mjs web/tests/history.test.mjs
 ```
 
 ## Use it
@@ -49,7 +49,15 @@ node --test web/tests/scoring.test.mjs
    - a chart of your ten aptitude scores (0–100)
    - your top three strengths, each with the answers that pointed to it
    - the activities that suit you best, which you can filter by category
-5. **Retake Survey** or **File ▸ New Survey** (⌘N) starts again. A new result replaces the old one.
+5. **Retake Survey** or **File ▸ New Survey** (⌘N) starts again. Every result you finish is kept.
+6. After a retake, small ▲▼ numbers next to each score show how much it moved since your previous result.
+
+## Past results
+
+Open **Past Results** from the clock button in the toolbar, from the results screen, or from the welcome screen.
+
+- **How your scores have changed:** a line chart with one point per result (#1, #2, …). Click the aptitude chips underneath to choose which lines to show. It starts with your latest top three.
+- **All results:** newest first, each with its date and top three strengths. **Open** shows that result in full, with a banner reminding you it's a past one. The trash button deletes a result after you confirm.
 
 ## Settings (⌘,)
 
@@ -61,7 +69,7 @@ Open with **TalentFinder ▸ Settings…** (⌘,) or the gear button in the tool
 | Move to the next question after answering | On | Moves on automatically after each answer |
 | Activities to show | 10 | How many activity matches appear in your results |
 | Show in Finder | — | Opens the folder where your data is saved |
-| Reset… | — | Deletes your saved answers and results (feedback is kept) |
+| Reset… | — | Deletes your saved answers and all past results (feedback is kept) |
 
 ## Feedback
 
@@ -72,7 +80,7 @@ Click the small **Feedback** tab in the bottom-right corner, or use **Help ▸ S
 `~/Library/Application Support/TalentFinder/`
 
 - `Survey In Progress.json`: an unfinished survey
-- `Latest Result.json`: your most recent result
+- `Result History.json`: every result you've finished, oldest first. If you used a version from before history existed, its `Latest Result.json` is moved in here automatically.
 - `Feedback.json`: the feedback you've written
 
 ## The website
@@ -81,7 +89,8 @@ Click the small **Feedback** tab in the bottom-right corner, or use **Help ▸ S
 
 - **Settings:** the gear button in the top right. ⌘, (Ctrl+, on Windows and Linux) also works, unless your browser keeps that shortcut for its own settings.
 - **Feedback:** the small **Feedback** tab in the bottom-right corner opens a pre-filled GitHub issue for you to review and submit.
-- **Reset:** Settings ▸ Reset… deletes the answers and results saved in this browser.
+- **Past results:** the clock button in the top bar. It works the same as in the Mac app: a trend chart with aptitude chips, and a list of results to open or delete.
+- **Reset:** Settings ▸ Reset… deletes the answers and all past results saved in this browser.
 
 ### Run it locally
 

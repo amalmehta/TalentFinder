@@ -11,6 +11,7 @@ struct ContentView: View {
             case .welcome: WelcomeView()
             case .survey: SurveyView()
             case .results: ResultsView()
+            case .history: HistoryView()
             }
         }
         .navigationTitle(title)
@@ -19,6 +20,12 @@ struct ContentView: View {
                 if model.screen != .welcome {
                     Button { model.screen = .welcome } label: { Label("Home", systemImage: "house") }
                         .help("Back to the start screen")
+                }
+            }
+            ToolbarItem(placement: .primaryAction) {
+                if !model.history.isEmpty && model.screen != .history {
+                    Button { model.screen = .history } label: { Label("Past Results", systemImage: "clock.arrow.circlepath") }
+                        .help("Past results and how your scores have changed")
                 }
             }
             ToolbarItem(placement: .primaryAction) {
@@ -40,6 +47,7 @@ struct ContentView: View {
         case .welcome: "TalentFinder"
         case .survey: "Survey"
         case .results: "Your Results"
+        case .history: "Past Results"
         }
     }
 }

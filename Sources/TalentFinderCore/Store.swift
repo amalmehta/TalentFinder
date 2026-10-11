@@ -53,22 +53,38 @@ public struct Store: Sendable {
     }
 
     var progressURL: URL { folder.appendingPathComponent("Survey In Progress.json") }
+    /// Only used by versions before result history; read once to migrate.
     var resultURL: URL { folder.appendingPathComponent("Latest Result.json") }
+    var historyURL: URL { folder.appendingPathComponent("Result History.json") }
     public var feedbackURL: URL { folder.appendingPathComponent("Feedback.json") }
 
     public func loadProgress() -> SurveyProgress? { read(progressURL) }
     public func saveProgress(_ p: SurveyProgress?) throws { try write(p, to: progressURL) }
 
-    public func loadResult() -> SurveyResult? { read(resultURL) }
-    public func saveResult(_ r: SurveyResult?) throws { try write(r, to: resultURL) }
+    func loadResult() -> SurveyResult? { read(resultURL) }
+    func saveResult(_ r: SurveyResult?) throws { try write(r, to: resultURL) }
+
+    /// Every completed result, oldest first. On first run after upgrading, the single
+    /// saved result from earlier versions is moved into the history.
+    public func loadHistory() -> [SurveyResult] {
+        if let history: [SurveyResult] = read(historyURL) { return history }
+        guard let old = loadResult() else { return [] }
+        if (try? saveHistory([old])) != nil { try? saveResult(nil) }
+        return [old]
+    }
+
+    public func saveHistory(_ history: [SurveyResult]) throws {
+        try write(history.isEmpty ? nil : history, to: historyURL)
+    }
 
     public func loadFeedback() -> [Feedback] { read(feedbackURL) ?? [] }
     public func addFeedback(_ f: Feedback) throws { try write(loadFeedback() + [f], to: feedbackURL) }
 
-    /// Deletes saved progress and results. Feedback is kept.
+    /// Deletes saved progress and every result. Feedback is kept.
     public func resetSurveyData() throws {
         try saveProgress(nil)
         try saveResult(nil)
+        try saveHistory([])
     }
 
     private func read<T: Decodable>(_ url: URL) -> T? {

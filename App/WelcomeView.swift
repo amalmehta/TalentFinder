@@ -73,8 +73,13 @@ struct WelcomeView: View {
                     .buttonStyle(.borderedProminent).controlSize(.large)
                     .keyboardShortcut(.defaultAction)
             }
-            if model.result != nil {
-                Button("See My Latest Results") { model.screen = .results }
+            if !model.history.isEmpty {
+                HStack(spacing: 16) {
+                    Button("See My Latest Results") { model.showLatest() }
+                    if model.history.count > 1 {
+                        Button("Past Results (\(model.history.count))") { model.screen = .history }
+                    }
+                }
             }
         }
     }

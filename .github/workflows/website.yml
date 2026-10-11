@@ -23,8 +23,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Check the web scorer matches the Swift one
-        run: node --test web/tests/scoring.test.mjs
+      - name: Check the web scorer matches the Swift one, and result history
+        run: node --test web/tests/scoring.test.mjs web/tests/history.test.mjs
 
   deploy:
     needs: test

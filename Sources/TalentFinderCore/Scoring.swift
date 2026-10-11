@@ -19,7 +19,7 @@ public struct ActivityMatch: Codable, Hashable, Identifiable, Sendable {
     public var id: String { activity }
 }
 
-public struct SurveyResult: Codable, Hashable, Sendable {
+public struct SurveyResult: Codable, Hashable, Identifiable, Sendable {
     public let completedAt: Date
     public let answeredCount: Int
     /// Strongest first.
@@ -28,6 +28,13 @@ public struct SurveyResult: Codable, Hashable, Sendable {
     public let matches: [ActivityMatch]
 
     public var topStrengths: [AptitudeScore] { Array(scores.prefix(3)) }
+
+    /// Results are told apart by when they were completed.
+    public var id: Date { completedAt }
+
+    public func score(for aptitude: Aptitude) -> Double {
+        scores.first { $0.aptitude == aptitude }?.score ?? 0
+    }
 }
 
 /// Turns answers into aptitude scores and activity matches. Pure and deterministic.

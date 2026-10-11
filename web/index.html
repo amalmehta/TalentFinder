@@ -14,9 +14,14 @@
     <button class="brand" id="home-button" type="button" aria-label="TalentFinder home">
       <span class="brand-mark" aria-hidden="true">✦</span> TalentFinder
     </button>
+    <div class="topbar-actions">
+    <button class="icon-button" id="history-button" type="button" aria-label="Past results" title="Past results" hidden>
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5M12 7v5l3 2"/></svg>
+    </button>
     <button class="icon-button" id="settings-button" type="button" aria-label="Settings" title="Settings (⌘, or Ctrl+,)">
       <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M19.4 13a7.6 7.6 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.4 7.4 0 0 0-1.7-1L15 3.5h-4l-.4 2.5a7.4 7.4 0 0 0-1.7 1l-2.4-1-2 3.4 2 1.6a7.6 7.6 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7.4 7.4 0 0 0 1.7 1l.4 2.5h4l.4-2.5a7.4 7.4 0 0 0 1.7-1l2.4 1 2-3.4zM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z" transform="translate(-1 0)"/></svg>
     </button>
+    </div>
   </header>
 
   <main id="app" tabindex="-1">
@@ -42,7 +47,7 @@
       </fieldset>
       <fieldset>
         <legend>Your data</legend>
-        <div class="row"><span>Saved in this browser only<small>Nothing you answer is sent anywhere.</small></span>
+        <div class="row"><span>Answers and all past results<small>Saved in this browser only. Nothing you answer is sent anywhere.</small></span>
           <button type="button" class="danger" id="reset-button">Reset…</button></div>
       </fieldset>
       <fieldset>
@@ -75,8 +80,8 @@
 
   <dialog id="confirm-dialog" aria-labelledby="confirm-title">
     <form method="dialog" class="sheet">
-      <h2 id="confirm-title">Delete your saved answers and results?</h2>
-      <p>This can't be undone.</p>
+      <h2 id="confirm-title"></h2>
+      <p id="confirm-message"></p>
       <div class="actions">
         <button value="cancel">Cancel</button>
         <button type="button" class="danger-fill" id="confirm-delete">Delete</button>

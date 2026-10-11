@@ -60,7 +60,7 @@ Asked and answered (2026-10-06):
 Decided without asking:
 - SwiftUI, macOS 14+, with the core logic in a separate Swift package (TalentFinderCore) so it can be tested with `swift test`.
 - The ten aptitudes and all question and activity weights are original. They are loosely inspired by multiple intelligences and RIASEC, and are not psychometrically validated.
-- Only the latest result is kept, with no history.
+- Only the latest result is kept, with no history. (Superseded 2026-10-11: history added.)
 - The feedback tab saves to Feedback.json on the Mac. Nothing is sent, because the brief names no destination.
 - Settings: shuffle questions, auto-advance, number of activities shown, show the data folder, and reset data.
 - Data is saved as JSON in ~/Library/Application Support/TalentFinder.
@@ -76,8 +76,17 @@ Website decisions made without asking:
 - Aptitude icons on the web are emoji, because SF Symbols don't exist there; colours match the Mac app.
 - Website settings are the same as the Mac app's minus "Show in Finder", with a gear button plus ⌘/Ctrl+,.
 
+Result history (asked and answered 2026-10-11):
+- In both the Mac app and the website, each with its own history; they still don't sync.
+- A list of past results to open, a trend chart to compare across retakes, and deleting single entries.
+- Every result is kept until deleted or reset.
+
+Result history decisions made without asking:
+- Results are identified by their completion time, so the saved format didn't change; the old single result moves into the history automatically.
+- The latest result also shows ▲▼ change since the previous one.
+- The trend chart spaces results evenly (#1, #2, …) instead of by calendar time, and starts with the latest top three aptitudes.
+
 Proposals (not done):
-- Result history and comparison over time.
 - Exporting results to PDF or Markdown.
 - An app icon, plus signing and notarisation for distribution.
 
@@ -104,3 +113,4 @@ CHANGELOG:
 - 2026-10-07 — pushed to GitHub as a private repo: https://github.com/amalmehta/TalentFinder
 - 2026-10-11 — made the GitHub repo public
 - 2026-10-11 — built the website version (web/), with JSON exported from Swift, exact JS↔Swift parity tests, and GitHub Pages deployment
+- 2026-10-11 — added result history to the Mac app and website: past results list, trend chart, change since last time, delete; old saved results migrate automatically

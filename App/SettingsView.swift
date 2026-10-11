@@ -25,7 +25,7 @@ struct SettingsView: View {
                 LabeledContent("Saved in") {
                     Button("Show in Finder") { model.revealDataFolder() }
                 }
-                LabeledContent("Survey answers and results") {
+                LabeledContent("Survey answers and all past results") {
                     Button("Reset…", role: .destructive) { confirmingReset = true }
                 }
             }
@@ -39,7 +39,7 @@ struct SettingsView: View {
         .scrollDisabled(true)
         .frame(width: 460)
         .fixedSize(horizontal: false, vertical: true)
-        .confirmationDialog("Delete your saved answers and results?", isPresented: $confirmingReset) {
+        .confirmationDialog("Delete your saved answers and all past results?", isPresented: $confirmingReset) {
             Button("Delete", role: .destructive) { model.resetAll() }
         } message: {
             Text("This can't be undone. Feedback you've written is kept.")

@@ -1,6 +1,7 @@
 // TalentFinder for the web: the same survey, scoring and screens as the Mac app.
 // State lives in localStorage; nothing is sent anywhere.
 import { score, accepts, newProgress, isComplete } from "./scoring.js";
+import { adding, removing, latestChange, migrate } from "./history.js";
 
 const REPO_ISSUES = "https://github.com/amalmehta/TalentFinder/issues/new";
 
@@ -20,7 +21,8 @@ const LOOK = {
 
 // ---------- Storage (all reads and writes are guarded: storage can be blocked) ----------
 
-const KEYS = { progress: "talentfinder.progress", result: "talentfinder.result", settings: "talentfinder.settings" };
+// `result` is only read once, to move a result saved by earlier versions into the history.
+const KEYS = { progress: "talentfinder.progress", history: "talentfinder.history", result: "talentfinder.result", settings: "talentfinder.settings" };
 const DEFAULT_SETTINGS = { shuffle: true, autoAdvance: true, topCount: 10 };
 
 function load(key) {
@@ -40,7 +42,9 @@ const state = {
   byId: {},
   screen: "welcome",
   progress: load(KEYS.progress),
-  result: load(KEYS.result),
+  history: migrate(load(KEYS.history), load(KEYS.result)), // oldest first
+  viewingId: null, // completedAt of the past result being shown; null means the latest
+  trendAptitudes: null, // aptitudes drawn on the trend chart; null until first chosen
   settings: { ...DEFAULT_SETTINGS, ...(load(KEYS.settings) ?? {}) },
   category: "All",
 };
@@ -48,6 +52,10 @@ const state = {
 const app = document.getElementById("app");
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
 const aptitude = (id) => state.survey.aptitudes.find((a) => a.id === id);
+const latest = () => state.history[state.history.length - 1] ?? null;
+const shownResult = () => state.history.find((r) => r.completedAt === state.viewingId) ?? latest();
+const isViewingLatest = () => shownResult() === latest();
+const formatDate = (iso, opts = { dateStyle: "long", timeStyle: "short" }) => new Date(iso).toLocaleString(undefined, opts);
 
 function show(screen) {
   state.screen = screen;
@@ -58,9 +66,10 @@ function show(screen) {
 
 function render() {
   if (state.screen === "survey" && !state.progress) state.screen = "welcome";
-  if (state.screen === "results" && !state.result) state.screen = "welcome";
-  document.title = { welcome: "TalentFinder", survey: "Survey · TalentFinder", results: "Your Results · TalentFinder" }[state.screen];
-  ({ welcome: renderWelcome, survey: renderSurvey, results: renderResults })[state.screen]();
+  if ((state.screen === "results" || state.screen === "history") && !state.history.length) state.screen = "welcome";
+  document.title = { welcome: "TalentFinder", survey: "Survey · TalentFinder", results: "Your Results · TalentFinder", history: "Past Results · TalentFinder" }[state.screen];
+  document.getElementById("history-button").hidden = !state.history.length || state.screen === "history";
+  ({ welcome: renderWelcome, survey: renderSurvey, results: renderResults, history: renderHistory })[state.screen]();
 }
 
 // ---------- Survey actions ----------
@@ -102,19 +111,50 @@ function goToFirstUnanswered() {
 
 function finish() {
   if (!state.progress || !isComplete(state.progress)) return;
-  state.result = { completedAt: new Date().toISOString(), ...score(state.progress.answers, state.survey) };
+  const result = { completedAt: new Date().toISOString(), ...score(state.progress.answers, state.survey) };
+  state.history = adding(result, state.history);
+  state.viewingId = null;
   state.progress = null;
-  save(KEYS.result, state.result);
+  save(KEYS.history, state.history);
   save(KEYS.progress, null);
   show("results");
 }
 
 function resetAll() {
   state.progress = null;
-  state.result = null;
+  state.history = [];
+  state.viewingId = null;
   save(KEYS.progress, null);
+  save(KEYS.history, null);
   save(KEYS.result, null);
   show("welcome");
+}
+
+// ---------- History actions ----------
+
+function showLatest() {
+  state.viewingId = null;
+  show("results");
+}
+
+function openResult(id) {
+  state.viewingId = id;
+  show("results");
+}
+
+function deleteResult(id) {
+  const r = state.history.find((x) => x.completedAt === id);
+  if (!r) return;
+  confirmThen(
+    "Delete this result?",
+    `The result from ${formatDate(id)} will be removed. This can't be undone.`,
+    () => {
+      state.history = removing(id, state.history);
+      if (state.viewingId === id) state.viewingId = null;
+      save(KEYS.history, state.history.length ? state.history : null);
+      render();
+    },
+  );
 }
 
 // ---------- Screens ----------
@@ -139,7 +179,10 @@ function renderWelcome() {
           ? `<button class="primary large" data-act="resume">Resume Survey (${answered} of ${p.order.length} answered)</button>
              <button data-act="start">Start Over</button>`
           : `<button class="primary large" data-act="start">Start Survey</button>`}
-        ${state.result ? `<button class="link" data-act="results">See My Latest Results</button>` : ""}
+        ${state.history.length ? `<div>
+          <button class="link" data-act="results">See My Latest Results</button>
+          ${state.history.length > 1 ? `<button class="link" data-act="history">Past Results (${state.history.length})</button>` : ""}
+        </div>` : ""}
       </div>
       <p class="footnote">About 10–15 minutes. Your answers are saved as you go and never leave this browser.</p>
     </section>`;
@@ -199,14 +242,19 @@ function ring(fit, color) {
 }
 
 function renderResults() {
-  const r = state.result;
-  const date = new Date(r.completedAt).toLocaleString(undefined, { dateStyle: "long", timeStyle: "short" });
+  const r = shownResult();
+  const date = formatDate(r.completedAt);
+  const change = isViewingLatest() ? latestChange(state.history, state.survey.aptitudes.map((a) => a.id)) : null;
+  const delta = (id) => {
+    const d = Math.round(change?.[id] ?? 0);
+    return d ? `<span class="delta ${d > 0 ? "up" : "down"}" title="Change since your previous result">${d > 0 ? "▲" : "▼"}${Math.abs(d)}</span>` : "";
+  };
 
   const bars = r.scores.map((s) => {
     const a = aptitude(s.aptitude);
     return `<div class="bar-row" style="--c:${LOOK[s.aptitude].color}">
       <span>${esc(a.name)}</span>
-      <div class="bar-track"><div class="bar" style="width:calc(${s.score}% - 32px)"></div><span class="bar-value">${Math.round(s.score)}</span></div>
+      <div class="bar-track"><div class="bar" style="width:calc(${s.score}% - 32px)"></div><span class="bar-value">${Math.round(s.score)}</span>${delta(s.aptitude)}</div>
     </div>`;
   }).join("");
 
@@ -240,11 +288,22 @@ function renderResults() {
 
   app.innerHTML = `
     <section class="results">
+      ${isViewingLatest() ? "" : `<div class="banner" role="status">
+        <span>🕘 You're looking at a past result from ${esc(date)}.</span>
+        <button data-act="history">Back to Past Results</button>
+        <button data-act="results">See Latest</button>
+      </div>`}
       <div class="results-head">
         <div><h1>Your natural aptitudes</h1><p>Based on ${r.answeredCount} answers · ${esc(date)}</p></div>
-        <button data-act="start">Retake Survey</button>
+        <div class="head-buttons">
+          ${state.history.length > 1 ? `<button data-act="history">Past Results</button>` : ""}
+          <button data-act="start">Retake Survey</button>
+        </div>
       </div>
-      <div class="chart" role="img" aria-label="Aptitude scores from 0 to 100: ${r.scores.map((s) => `${aptitude(s.aptitude).name} ${Math.round(s.score)}`).join(", ")}">${bars}</div>
+      <div>
+        <div class="chart" role="img" aria-label="Aptitude scores from 0 to 100: ${r.scores.map((s) => `${aptitude(s.aptitude).name} ${Math.round(s.score)}`).join(", ")}">${bars}</div>
+        ${change ? `<p class="footnote" style="margin-top:12px">▲▼ show the change since your previous result on ${esc(formatDate(state.history[state.history.length - 2].completedAt, { dateStyle: "medium" }))}.</p>` : ""}
+      </div>
       <section><h2>Your top strengths</h2>${strengths}</section>
       <section>
         <div class="activities-head">
@@ -258,16 +317,76 @@ function renderResults() {
     </section>`;
 }
 
+/** Line chart of the chosen aptitudes across results, evenly spaced by result number. */
+function trendChart(shown) {
+  const W = 640, H = 240, left = 8, right = 36, top = 10, bottom = 30;
+  const n = state.history.length;
+  const x = (i) => left + ((W - left - right) * (n === 1 ? 0.5 : i / (n - 1)));
+  const y = (v) => top + (H - top - bottom) * (1 - v / 100);
+  const grid = [0, 25, 50, 75, 100].map((v) =>
+    `<line class="grid" x1="${left}" x2="${W - right}" y1="${y(v)}" y2="${y(v)}"/><text x="${W - right + 6}" y="${y(v) + 4}">${v}</text>`).join("");
+  const labels = state.history.map((r, i) =>
+    `<text x="${x(i)}" y="${H - 8}" text-anchor="${i === 0 ? "start" : i === n - 1 ? "end" : "middle"}">#${i + 1} · ${esc(formatDate(r.completedAt, { month: "short", day: "numeric" }))}</text>`).join("");
+  const lines = state.survey.aptitudes.filter((a) => shown.has(a.id)).map((a) => {
+    const pts = state.history.map((r, i) => [x(i), y(r.scores.find((s) => s.aptitude === a.id)?.score ?? 0)]);
+    const c = LOOK[a.id].color;
+    return `<polyline stroke="${c}" points="${pts.map((p) => p.join(",")).join(" ")}"/>` +
+      pts.map(([px, py]) => `<circle cx="${px}" cy="${py}" r="4" fill="var(--bg)" stroke="${c}" stroke-width="2"/>`).join("");
+  }).join("");
+  const desc = state.survey.aptitudes.filter((a) => shown.has(a.id))
+    .map((a) => `${a.name}: ${state.history.map((r) => Math.round(r.scores.find((s) => s.aptitude === a.id)?.score ?? 0)).join(" → ")}`).join("; ");
+  return `<svg class="trend" viewBox="0 0 ${W} ${H}" role="img" aria-label="Scores over time. ${esc(desc)}">${grid}${labels}${lines}</svg>`;
+}
+
+function renderHistory() {
+  const shown = new Set(state.trendAptitudes ?? latest().scores.slice(0, 3).map((s) => s.aptitude));
+  const chips = state.survey.aptitudes.map((a) => `
+    <button data-toggle="${a.id}" aria-pressed="${shown.has(a.id)}" style="--c:${LOOK[a.id].color}">${LOOK[a.id].emoji} ${esc(a.name)}</button>`).join("");
+  const rows = [...state.history].reverse().map((r) => `
+    <div class="history-row">
+      <div class="activity-info">
+        <div class="activity-name">${esc(formatDate(r.completedAt))}${r === latest() ? '<span class="badge">Latest</span>' : ""}</div>
+        <div class="chips">${r.scores.slice(0, 3).map((s) =>
+          `<span class="chip" style="--c:${LOOK[s.aptitude].color}">${LOOK[s.aptitude].emoji} ${esc(aptitude(s.aptitude).name)} ${Math.round(s.score)}</span>`).join("")}</div>
+      </div>
+      <div class="row-buttons">
+        <button data-open="${esc(r.completedAt)}">Open</button>
+        <button data-delete="${esc(r.completedAt)}" aria-label="Delete result from ${esc(formatDate(r.completedAt))}" title="Delete this result">🗑</button>
+      </div>
+    </div>`).join("");
+
+  app.innerHTML = `
+    <section class="results">
+      <div class="results-head"><div><h1>Past Results</h1><p>${state.history.length === 1 ? "1 result" : `${state.history.length} results`}</p></div></div>
+      ${state.history.length > 1 ? `<section>
+        <h2>How your scores have changed</h2>
+        ${trendChart(shown)}
+        <p class="footnote" style="margin-top:10px">Choose which aptitudes to show:</p>
+        <div class="toggle-chips">${chips}</div>
+      </section>` : ""}
+      <section><h2>All results</h2>${rows}</section>
+    </section>`;
+}
+
 // ---------- Events ----------
 
 app.addEventListener("click", (e) => {
   const btn = e.target.closest("button");
   if (!btn) return;
   if (btn.dataset.answer !== undefined) return answer(Number(btn.dataset.answer));
+  if (btn.dataset.open) return openResult(btn.dataset.open);
+  if (btn.dataset.delete) return deleteResult(btn.dataset.delete);
+  if (btn.dataset.toggle) {
+    const shown = new Set(state.trendAptitudes ?? latest().scores.slice(0, 3).map((s) => s.aptitude));
+    shown.has(btn.dataset.toggle) ? shown.delete(btn.dataset.toggle) : shown.add(btn.dataset.toggle);
+    state.trendAptitudes = [...shown];
+    return renderHistory();
+  }
   ({
     start: startNew,
     resume: () => show("survey"),
-    results: () => show("results"),
+    results: showLatest,
+    history: () => show("history"),
     back: () => move(-1),
     next: () => move(1),
     finish,
@@ -280,6 +399,7 @@ app.addEventListener("change", (e) => {
 });
 
 document.getElementById("home-button").addEventListener("click", () => show("welcome"));
+document.getElementById("history-button").addEventListener("click", () => show("history"));
 
 document.addEventListener("keydown", (e) => {
   if ((e.metaKey || e.ctrlKey) && e.key === ",") { e.preventDefault(); openSettings(); return; }
@@ -317,11 +437,26 @@ document.getElementById("settings-button").addEventListener("click", openSetting
 [prefShuffle, prefAuto, prefTop].forEach((el) => el.addEventListener("change", saveSettings));
 
 const confirmDialog = document.getElementById("confirm-dialog");
-document.getElementById("reset-button").addEventListener("click", () => confirmDialog.showModal());
+let onConfirm = null;
+
+/** Asks before something that can't be undone; runs `action` only if the person clicks Delete. */
+function confirmThen(title, message, action) {
+  document.getElementById("confirm-title").textContent = title;
+  document.getElementById("confirm-message").textContent = message;
+  onConfirm = action;
+  confirmDialog.showModal();
+}
+
+document.getElementById("reset-button").addEventListener("click", () =>
+  confirmThen("Delete your saved answers and all past results?", "This can't be undone. Your settings are kept.", () => {
+    settingsDialog.close();
+    resetAll();
+  }));
 document.getElementById("confirm-delete").addEventListener("click", () => {
   confirmDialog.close();
-  settingsDialog.close();
-  resetAll();
+  const action = onConfirm;
+  onConfirm = null;
+  action?.();
 });
 
 // ---------- Feedback ----------
@@ -365,6 +500,11 @@ async function init() {
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     state.survey = await res.json();
     state.byId = Object.fromEntries(state.survey.questions.map((q) => [q.id, q]));
+    // Finish moving a result saved by an earlier version into the history.
+    if (load(KEYS.history) === null && state.history.length) {
+      save(KEYS.history, state.history);
+      save(KEYS.result, null);
+    }
     // Drop saved progress that no longer fits the question set.
     if (state.progress && !state.progress.order?.every((id) => state.byId[id])) {
       state.progress = null;

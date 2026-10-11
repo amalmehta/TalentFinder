@@ -10,9 +10,9 @@ Find out what you're naturally good at. A 60-question survey scores ten aptitude
 |---|---|---|
 | ![Survey question](docs/screenshots/Survey.jpg) | ![Top strengths and activity matches](docs/screenshots/Strengths%20and%20Activities.jpg) | ![Settings window](docs/screenshots/Settings.jpg) |
 
-| Website | On a phone |
-|---|---|
-| ![Website results in dark mode](docs/screenshots/Website%20Results.jpg) | ![Website survey on a phone](docs/screenshots/Website%20on%20a%20Phone.jpg) |
+| Past results | Website | On a phone |
+|---|---|---|
+| ![Past results: how scores changed across retakes](docs/screenshots/Past%20Results.jpg) | ![Website past results in dark mode](docs/screenshots/Website%20Past%20Results.jpg) | ![Website survey on a phone](docs/screenshots/Website%20on%20a%20Phone.jpg) |
 
 ```mermaid
 flowchart LR

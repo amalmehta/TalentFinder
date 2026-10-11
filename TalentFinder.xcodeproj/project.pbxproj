@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		25EF8F18DD24D8C0573D808E /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4880D0BE41B0FF8016C0F40 /* HistoryView.swift */; };
 		407DE67AA2AF7E0F9DAA36D4 /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA19D567ABF5D56362E9A6 /* FeedbackView.swift */; };
 		431A2FEBD8822C9775541874 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C789E4B3E7A334BE8C0FDF /* AppModel.swift */; };
 		4C32D63D0189B7236E6ED557 /* TalentFinderCore in Frameworks */ = {isa = PBXBuildFile; productRef = 57214D1A44CFE954126B9250 /* TalentFinderCore */; };
@@ -29,6 +30,7 @@
 		C52E8B6C4E9E710CD31925CE /* SurveyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyView.swift; sourceTree = "<group>"; };
 		E5C789E4B3E7A334BE8C0FDF /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		EA6C1A88514BA6B8D989A4D8 /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
+		F4880D0BE41B0FF8016C0F40 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				E5C789E4B3E7A334BE8C0FDF /* AppModel.swift */,
 				6083A8C9373DEAE7D4EE601D /* ContentView.swift */,
 				3AFA19D567ABF5D56362E9A6 /* FeedbackView.swift */,
+				F4880D0BE41B0FF8016C0F40 /* HistoryView.swift */,
 				EA6C1A88514BA6B8D989A4D8 /* ResultsView.swift */,
 				80566D4651DA4D44DCE91DA2 /* SettingsView.swift */,
 				C52E8B6C4E9E710CD31925CE /* SurveyView.swift */,
@@ -149,6 +152,7 @@
 				431A2FEBD8822C9775541874 /* AppModel.swift in Sources */,
 				A20B775EEE1B47AC9FD6182B /* ContentView.swift in Sources */,
 				407DE67AA2AF7E0F9DAA36D4 /* FeedbackView.swift in Sources */,
+				25EF8F18DD24D8C0573D808E /* HistoryView.swift in Sources */,
 				B6E2AFBFBAFAE7F2A1F883BC /* ResultsView.swift in Sources */,
 				9268CEDA5DEAE077B072C7B6 /* SettingsView.swift in Sources */,
 				7ACE83F363CC3DB26BB9CA21 /* SurveyView.swift in Sources */,

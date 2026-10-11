@@ -11,8 +11,14 @@ struct ResultsView: View {
         if let r = model.result {
             ScrollView {
                 VStack(alignment: .leading, spacing: 28) {
+                    if !model.isViewingLatest { olderResultBanner(r) }
                     header(r)
                     chart(r)
+                    if model.isViewingLatest, model.history.count > 1 {
+                        Text("▲▼ show the change since your previous result on \(model.history[model.history.count - 2].completedAt.formatted(date: .abbreviated, time: .omitted)).")
+                            .font(.footnote).foregroundStyle(.secondary)
+                            .padding(.top, -16)
+                    }
                     strengths(r)
                     activities(r)
                 }
@@ -34,8 +40,29 @@ struct ResultsView: View {
                     .foregroundStyle(.secondary)
             }
             Spacer()
+            if model.history.count > 1 {
+                Button("Past Results") { model.screen = .history }
+            }
             Button("Retake Survey") { model.startNew() }
         }
+    }
+
+    private func olderResultBanner(_ r: SurveyResult) -> some View {
+        HStack {
+            Label("You're looking at a past result from \(r.completedAt.formatted(date: .long, time: .shortened)).",
+                  systemImage: "clock.arrow.circlepath")
+            Spacer()
+            Button("Back to Past Results") { model.screen = .history }
+            Button("See Latest") { model.showLatest() }
+        }
+        .padding(12)
+        .background(Color.accentColor.opacity(0.12), in: RoundedRectangle(cornerRadius: 10))
+    }
+
+    /// Change since the previous result, shown only on the latest result.
+    private func change(for a: Aptitude) -> Double? {
+        guard model.isViewingLatest else { return nil }
+        return ResultHistory.latestChange(in: model.history)?[a]
     }
 
     private func chart(_ r: SurveyResult) -> some View {
@@ -44,7 +71,15 @@ struct ResultsView: View {
                 .foregroundStyle(s.aptitude.color.gradient)
                 .cornerRadius(4)
                 .annotation(position: .trailing) {
-                    Text("\(Int(s.score.rounded()))").font(.caption.monospacedDigit()).foregroundStyle(.secondary)
+                    HStack(spacing: 4) {
+                        Text("\(Int(s.score.rounded()))").foregroundStyle(.secondary)
+                        if let d = change(for: s.aptitude), Int(d.rounded()) != 0 {
+                            Text(d > 0 ? "▲\(Int(d.rounded()))" : "▼\(Int(-d.rounded()))")
+                                .foregroundStyle(d > 0 ? .green : .orange)
+                                .help("Change since your previous result")
+                        }
+                    }
+                    .font(.caption.monospacedDigit())
                 }
         }
         .chartXScale(domain: 0...100)
