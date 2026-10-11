@@ -1,0 +1,1888 @@
+{
+  "activities" : [
+    {
+      "category" : "Work & Study",
+      "name" : "Software engineering",
+      "weights" : {
+        "analytical" : 0.8,
+        "creative" : 0.3,
+        "handsOn" : 0.2
+      }
+    },
+    {
+      "category" : "Work & Study",
+      "name" : "Data science",
+      "weights" : {
+        "analytical" : 1,
+        "verbal" : 0.2
+      }
+    },
+    {
+      "category" : "Work & Study",
+      "name" : "Architecture",
+      "weights" : {
+        "analytical" : 0.3,
+        "creative" : 0.6,
+        "spatial" : 1
+      }
+    },
+    {
+      "category" : "Work & Study",
+      "name" : "Teaching",
+      "weights" : {
+        "leadership" : 0.4,
+        "social" : 0.8,
+        "verbal" : 0.7
+      }
+    },
+    {
+      "category" : "Work & Study",
+      "name" : "Nursing & healthcare",
+      "weights" : {
+        "analytical" : 0.3,
+        "physical" : 0.3,
+        "social" : 1
+      }
+    },
+    {
+      "category" : "Work & Study",
+      "name" : "Journalism",
+      "weights" : {
+        "analytical" : 0.3,
+        "social" : 0.4,
+        "verbal" : 1
+      }
+    },
+    {
+      "category" : "Work & Study",
+      "name" : "Law",
+      "weights" : {
+        "analytical" : 0.7,
+        "leadership" : 0.5,
+        "verbal" : 0.9
+      }
+    },
+    {
+      "category" : "Work & Study",
+      "name" : "Starting a business",
+      "weights" : {
+        "creative" : 0.5,
+        "leadership" : 1,
+        "social" : 0.4
+      }
+    },
+    {
+      "category" : "Work & Study",
+      "name" : "Sales",
+      "weights" : {
+        "leadership" : 0.8,
+        "social" : 0.8,
+        "verbal" : 0.4
+      }
+    },
+    {
+      "category" : "Work & Study",
+      "name" : "Counselling & coaching",
+      "weights" : {
+        "social" : 1,
+        "verbal" : 0.5
+      }
+    },
+    {
+      "category" : "Work & Study",
+      "name" : "Engineering",
+      "weights" : {
+        "analytical" : 0.8,
+        "handsOn" : 0.8,
+        "spatial" : 0.4
+      }
+    },
+    {
+      "category" : "Work & Study",
+      "name" : "Carpentry",
+      "weights" : {
+        "handsOn" : 1,
+        "spatial" : 0.6
+      }
+    },
+    {
+      "category" : "Work & Study",
+      "name" : "Veterinary care",
+      "weights" : {
+        "analytical" : 0.4,
+        "nature" : 1,
+        "social" : 0.3
+      }
+    },
+    {
+      "category" : "Work & Study",
+      "name" : "Landscape design",
+      "weights" : {
+        "creative" : 0.5,
+        "nature" : 0.7,
+        "spatial" : 0.7
+      }
+    },
+    {
+      "category" : "Work & Study",
+      "name" : "Graphic design",
+      "weights" : {
+        "creative" : 0.9,
+        "spatial" : 0.8
+      }
+    },
+    {
+      "category" : "Work & Study",
+      "name" : "Event planning",
+      "weights" : {
+        "creative" : 0.3,
+        "leadership" : 0.8,
+        "social" : 0.6
+      }
+    },
+    {
+      "category" : "Work & Study",
+      "name" : "Translation",
+      "weights" : {
+        "analytical" : 0.2,
+        "verbal" : 1
+      }
+    },
+    {
+      "category" : "Work & Study",
+      "name" : "Scientific research",
+      "weights" : {
+        "analytical" : 0.9,
+        "nature" : 0.3,
+        "verbal" : 0.3
+      }
+    },
+    {
+      "category" : "Work & Study",
+      "name" : "Flying (pilot)",
+      "weights" : {
+        "analytical" : 0.5,
+        "physical" : 0.4,
+        "spatial" : 0.8
+      }
+    },
+    {
+      "category" : "Work & Study",
+      "name" : "Cooking professionally",
+      "weights" : {
+        "creative" : 0.6,
+        "handsOn" : 0.6,
+        "physical" : 0.4
+      }
+    },
+    {
+      "category" : "Creative",
+      "name" : "Painting & drawing",
+      "weights" : {
+        "creative" : 1,
+        "spatial" : 0.7
+      }
+    },
+    {
+      "category" : "Creative",
+      "name" : "Creative writing",
+      "weights" : {
+        "creative" : 0.9,
+        "verbal" : 1
+      }
+    },
+    {
+      "category" : "Creative",
+      "name" : "Playing an instrument",
+      "weights" : {
+        "musical" : 1,
+        "physical" : 0.3
+      }
+    },
+    {
+      "category" : "Creative",
+      "name" : "Singing",
+      "weights" : {
+        "musical" : 1,
+        "social" : 0.2
+      }
+    },
+    {
+      "category" : "Creative",
+      "name" : "Songwriting",
+      "weights" : {
+        "creative" : 0.7,
+        "musical" : 0.8,
+        "verbal" : 0.6
+      }
+    },
+    {
+      "category" : "Creative",
+      "name" : "Photography",
+      "weights" : {
+        "creative" : 0.7,
+        "nature" : 0.3,
+        "spatial" : 0.8
+      }
+    },
+    {
+      "category" : "Creative",
+      "name" : "Acting",
+      "weights" : {
+        "creative" : 0.5,
+        "physical" : 0.4,
+        "social" : 0.5,
+        "verbal" : 0.6
+      }
+    },
+    {
+      "category" : "Creative",
+      "name" : "Film-making",
+      "weights" : {
+        "creative" : 0.8,
+        "leadership" : 0.5,
+        "spatial" : 0.5
+      }
+    },
+    {
+      "category" : "Sport & Movement",
+      "name" : "Dance",
+      "weights" : {
+        "creative" : 0.3,
+        "musical" : 0.7,
+        "physical" : 1
+      }
+    },
+    {
+      "category" : "Sport & Movement",
+      "name" : "Team sports",
+      "weights" : {
+        "leadership" : 0.3,
+        "physical" : 1,
+        "social" : 0.4
+      }
+    },
+    {
+      "category" : "Sport & Movement",
+      "name" : "Martial arts",
+      "weights" : {
+        "physical" : 1,
+        "spatial" : 0.2
+      }
+    },
+    {
+      "category" : "Sport & Movement",
+      "name" : "Rock climbing",
+      "weights" : {
+        "nature" : 0.3,
+        "physical" : 0.9,
+        "spatial" : 0.5
+      }
+    },
+    {
+      "category" : "Sport & Movement",
+      "name" : "Running & endurance sports",
+      "weights" : {
+        "nature" : 0.3,
+        "physical" : 1
+      }
+    },
+    {
+      "category" : "Sport & Movement",
+      "name" : "Yoga",
+      "weights" : {
+        "nature" : 0.2,
+        "physical" : 0.8
+      }
+    },
+    {
+      "category" : "Sport & Movement",
+      "name" : "Sailing",
+      "weights" : {
+        "handsOn" : 0.4,
+        "nature" : 0.7,
+        "physical" : 0.6
+      }
+    },
+    {
+      "category" : "Hobbies",
+      "name" : "Chess & strategy games",
+      "weights" : {
+        "analytical" : 1,
+        "spatial" : 0.5
+      }
+    },
+    {
+      "category" : "Hobbies",
+      "name" : "Puzzles & escape rooms",
+      "weights" : {
+        "analytical" : 0.9,
+        "spatial" : 0.4
+      }
+    },
+    {
+      "category" : "Hobbies",
+      "name" : "Gardening",
+      "weights" : {
+        "handsOn" : 0.5,
+        "nature" : 1
+      }
+    },
+    {
+      "category" : "Hobbies",
+      "name" : "Birdwatching",
+      "weights" : {
+        "nature" : 1,
+        "spatial" : 0.3
+      }
+    },
+    {
+      "category" : "Hobbies",
+      "name" : "Hiking",
+      "weights" : {
+        "nature" : 0.9,
+        "physical" : 0.7
+      }
+    },
+    {
+      "category" : "Hobbies",
+      "name" : "DIY & home repair",
+      "weights" : {
+        "handsOn" : 1,
+        "spatial" : 0.4
+      }
+    },
+    {
+      "category" : "Hobbies",
+      "name" : "Electronics & robotics",
+      "weights" : {
+        "analytical" : 0.8,
+        "handsOn" : 0.8
+      }
+    },
+    {
+      "category" : "Hobbies",
+      "name" : "Debating",
+      "weights" : {
+        "analytical" : 0.6,
+        "leadership" : 0.6,
+        "verbal" : 0.9
+      }
+    },
+    {
+      "category" : "Hobbies",
+      "name" : "Volunteering",
+      "weights" : {
+        "leadership" : 0.3,
+        "social" : 1
+      }
+    },
+    {
+      "category" : "Hobbies",
+      "name" : "Community organising",
+      "weights" : {
+        "leadership" : 0.9,
+        "social" : 0.7
+      }
+    },
+    {
+      "category" : "Hobbies",
+      "name" : "Learning languages",
+      "weights" : {
+        "musical" : 0.2,
+        "verbal" : 1
+      }
+    },
+    {
+      "category" : "Hobbies",
+      "name" : "Model making",
+      "weights" : {
+        "creative" : 0.3,
+        "handsOn" : 0.8,
+        "spatial" : 0.7
+      }
+    }
+  ],
+  "aptitudes" : [
+    {
+      "id" : "analytical",
+      "name" : "Analytical",
+      "summary" : "You enjoy spotting patterns, reasoning step by step and solving problems with logic and numbers."
+    },
+    {
+      "id" : "verbal",
+      "name" : "Words & Language",
+      "summary" : "Words come easily to you — reading, writing, explaining and playing with language."
+    },
+    {
+      "id" : "spatial",
+      "name" : "Spatial & Visual",
+      "summary" : "You think in pictures: you can picture shapes, layouts and routes, and see how things fit together."
+    },
+    {
+      "id" : "musical",
+      "name" : "Musical & Rhythmic",
+      "summary" : "You're tuned in to sound, pitch and rhythm, and music sticks with you."
+    },
+    {
+      "id" : "physical",
+      "name" : "Physical & Movement",
+      "summary" : "You learn through your body — coordination, balance, timing and movement feel natural."
+    },
+    {
+      "id" : "social",
+      "name" : "People & Empathy",
+      "summary" : "You read people well, notice how others feel and help them feel understood."
+    },
+    {
+      "id" : "leadership",
+      "name" : "Leading & Persuading",
+      "summary" : "You like to take charge, persuade others and get a group moving towards a goal."
+    },
+    {
+      "id" : "creative",
+      "name" : "Creative & Imaginative",
+      "summary" : "You generate original ideas and enjoy making things that didn't exist before."
+    },
+    {
+      "id" : "handsOn",
+      "name" : "Hands-on & Mechanical",
+      "summary" : "You like to build, fix and take things apart, and you understand how machines work."
+    },
+    {
+      "id" : "nature",
+      "name" : "Nature & Living Things",
+      "summary" : "You're drawn to animals, plants and the outdoors, and notice details in the natural world."
+    }
+  ],
+  "categories" : [
+    "Work & Study",
+    "Creative",
+    "Sport & Movement",
+    "Hobbies"
+  ],
+  "questions" : [
+    {
+      "id" : "an1",
+      "instruction" : "How much do you agree?",
+      "kind" : "agreement",
+      "options" : [
+
+      ],
+      "prompt" : "I enjoy puzzles that have one right answer, like Sudoku or logic problems.",
+      "reversed" : false,
+      "scaleLabels" : [
+        "Strongly disagree",
+        "Disagree",
+        "Not sure",
+        "Agree",
+        "Strongly agree"
+      ],
+      "weights" : {
+        "analytical" : 1
+      }
+    },
+    {
+      "id" : "an2",
+      "instruction" : "How much do you agree?",
+      "kind" : "agreement",
+      "options" : [
+
+      ],
+      "prompt" : "When something goes wrong, I like to work out exactly why before fixing it.",
+      "reversed" : false,
+      "scaleLabels" : [
+        "Strongly disagree",
+        "Disagree",
+        "Not sure",
+        "Agree",
+        "Strongly agree"
+      ],
+      "weights" : {
+        "analytical" : 1,
+        "handsOn" : 0.3
+      }
+    },
+    {
+      "id" : "an3",
+      "instruction" : "How much do you agree?",
+      "kind" : "agreement",
+      "options" : [
+
+      ],
+      "prompt" : "I find numbers and statistics boring.",
+      "reversed" : true,
+      "scaleLabels" : [
+        "Strongly disagree",
+        "Disagree",
+        "Not sure",
+        "Agree",
+        "Strongly agree"
+      ],
+      "weights" : {
+        "analytical" : 1
+      }
+    },
+    {
+      "id" : "an4",
+      "instruction" : "How easy is this for you?",
+      "kind" : "ability",
+      "options" : [
+
+      ],
+      "prompt" : "Doing mental arithmetic, like splitting a bill in your head",
+      "reversed" : false,
+      "scaleLabels" : [
+        "Very hard",
+        "Hard",
+        "About average",
+        "Easy",
+        "Very easy"
+      ],
+      "weights" : {
+        "analytical" : 1
+      }
+    },
+    {
+      "id" : "an5",
+      "instruction" : "How easy is this for you?",
+      "kind" : "ability",
+      "options" : [
+
+      ],
+      "prompt" : "Spotting the flaw in someone's argument",
+      "reversed" : false,
+      "scaleLabels" : [
+        "Very hard",
+        "Hard",
+        "About average",
+        "Easy",
+        "Very easy"
+      ],
+      "weights" : {
+        "analytical" : 1,
+        "verbal" : 0.3
+      }
+    },
+    {
+      "id" : "ve1",
+      "instruction" : "How much do you agree?",
+      "kind" : "agreement",
+      "options" : [
+
+      ],
+      "prompt" : "I often lose track of time when I'm reading.",
+      "reversed" : false,
+      "scaleLabels" : [
+        "Strongly disagree",
+        "Disagree",
+        "Not sure",
+        "Agree",
+        "Strongly agree"
+      ],
+      "weights" : {
+        "verbal" : 1
+      }
+    },
+    {
+      "id" : "ve2",
+      "instruction" : "How much do you agree?",
+      "kind" : "agreement",
+      "options" : [
+
+      ],
+      "prompt" : "People tell me I explain things clearly.",
+      "reversed" : false,
+      "scaleLabels" : [
+        "Strongly disagree",
+        "Disagree",
+        "Not sure",
+        "Agree",
+        "Strongly agree"
+      ],
+      "weights" : {
+        "social" : 0.3,
+        "verbal" : 1
+      }
+    },
+    {
+      "id" : "ve3",
+      "instruction" : "How much do you agree?",
+      "kind" : "agreement",
+      "options" : [
+
+      ],
+      "prompt" : "Writing even a short email feels like a chore.",
+      "reversed" : true,
+      "scaleLabels" : [
+        "Strongly disagree",
+        "Disagree",
+        "Not sure",
+        "Agree",
+        "Strongly agree"
+      ],
+      "weights" : {
+        "verbal" : 1
+      }
+    },
+    {
+      "id" : "ve4",
+      "instruction" : "How easy is this for you?",
+      "kind" : "ability",
+      "options" : [
+
+      ],
+      "prompt" : "Learning new words or picking up a foreign language",
+      "reversed" : false,
+      "scaleLabels" : [
+        "Very hard",
+        "Hard",
+        "About average",
+        "Easy",
+        "Very easy"
+      ],
+      "weights" : {
+        "verbal" : 1
+      }
+    },
+    {
+      "id" : "ve5",
+      "instruction" : "How easy is this for you?",
+      "kind" : "ability",
+      "options" : [
+
+      ],
+      "prompt" : "Telling a story so that people stay hooked",
+      "reversed" : false,
+      "scaleLabels" : [
+        "Very hard",
+        "Hard",
+        "About average",
+        "Easy",
+        "Very easy"
+      ],
+      "weights" : {
+        "creative" : 0.3,
+        "verbal" : 1
+      }
+    },
+    {
+      "id" : "sp1",
+      "instruction" : "How much do you agree?",
+      "kind" : "agreement",
+      "options" : [
+
+      ],
+      "prompt" : "I can usually find my way back to a place I've only visited once.",
+      "reversed" : false,
+      "scaleLabels" : [
+        "Strongly disagree",
+        "Disagree",
+        "Not sure",
+        "Agree",
+        "Strongly agree"
+      ],
+      "weights" : {
+        "spatial" : 1
+      }
+    },
+    {
+      "id" : "sp2",
+      "instruction" : "How much do you agree?",
+      "kind" : "agreement",
+      "options" : [
+
+      ],
+      "prompt" : "I can picture things in my head in detail — rooms, objects, diagrams.",
+      "reversed" : false,
+      "scaleLabels" : [
+        "Strongly disagree",
+        "Disagree",
+        "Not sure",
+        "Agree",
+        "Strongly agree"
+      ],
+      "weights" : {
+        "creative" : 0.3,
+        "spatial" : 1
+      }
+    },
+    {
+      "id" : "sp3",
+      "instruction" : "How much do you agree?",
+      "kind" : "agreement",
+      "options" : [
+
+      ],
+      "prompt" : "Maps and diagrams confuse me.",
+      "reversed" : true,
+      "scaleLabels" : [
+        "Strongly disagree",
+        "Disagree",
+        "Not sure",
+        "Agree",
+        "Strongly agree"
+      ],
+      "weights" : {
+        "spatial" : 1
+      }
+    },
+    {
+      "id" : "sp4",
+      "instruction" : "How easy is this for you?",
+      "kind" : "ability",
+      "options" : [
+
+      ],
+      "prompt" : "Packing a car boot or a suitcase so everything fits",
+      "reversed" : false,
+      "scaleLabels" : [
+        "Very hard",
+        "Hard",
+        "About average",
+        "Easy",
+        "Very easy"
+      ],
+      "weights" : {
+        "handsOn" : 0.3,
+        "spatial" : 1
+      }
+    },
+    {
+      "id" : "sp5",
+      "instruction" : "How easy is this for you?",
+      "kind" : "ability",
+      "options" : [
+
+      ],
+      "prompt" : "Imagining what an object looks like from the other side",
+      "reversed" : false,
+      "scaleLabels" : [
+        "Very hard",
+        "Hard",
+        "About average",
+        "Easy",
+        "Very easy"
+      ],
+      "weights" : {
+        "spatial" : 1
+      }
+    },
+    {
+      "id" : "mu1",
+      "instruction" : "How much do you agree?",
+      "kind" : "agreement",
+      "options" : [
+
+      ],
+      "prompt" : "I notice when a singer or instrument is slightly out of tune.",
+      "reversed" : false,
+      "scaleLabels" : [
+        "Strongly disagree",
+        "Disagree",
+        "Not sure",
+        "Agree",
+        "Strongly agree"
+      ],
+      "weights" : {
+        "musical" : 1
+      }
+    },
+    {
+      "id" : "mu2",
+      "instruction" : "How much do you agree?",
+      "kind" : "agreement",
+      "options" : [
+
+      ],
+      "prompt" : "A tune I've heard once or twice stays in my head.",
+      "reversed" : false,
+      "scaleLabels" : [
+        "Strongly disagree",
+        "Disagree",
+        "Not sure",
+        "Agree",
+        "Strongly agree"
+      ],
+      "weights" : {
+        "musical" : 1
+      }
+    },
+    {
+      "id" : "mu3",
+      "instruction" : "How much do you agree?",
+      "kind" : "agreement",
+      "options" : [
+
+      ],
+      "prompt" : "I rarely listen to music by choice.",
+      "reversed" : true,
+      "scaleLabels" : [
+        "Strongly disagree",
+        "Disagree",
+        "Not sure",
+        "Agree",
+        "Strongly agree"
+      ],
+      "weights" : {
+        "musical" : 1
+      }
+    },
+    {
+      "id" : "mu4",
+      "instruction" : "How easy is this for you?",
+      "kind" : "ability",
+      "options" : [
+
+      ],
+      "prompt" : "Clapping or tapping along in time with a song",
+      "reversed" : false,
+      "scaleLabels" : [
+        "Very hard",
+        "Hard",
+        "About average",
+        "Easy",
+        "Very easy"
+      ],
+      "weights" : {
+        "musical" : 1,
+        "physical" : 0.3
+      }
+    },
+    {
+      "id" : "mu5",
+      "instruction" : "How easy is this for you?",
+      "kind" : "ability",
+      "options" : [
+
+      ],
+      "prompt" : "Picking out a melody by ear, on an instrument or by humming",
+      "reversed" : false,
+      "scaleLabels" : [
+        "Very hard",
+        "Hard",
+        "About average",
+        "Easy",
+        "Very easy"
+      ],
+      "weights" : {
+        "musical" : 1
+      }
+    },
+    {
+      "id" : "ph1",
+      "instruction" : "How much do you agree?",
+      "kind" : "agreement",
+      "options" : [
+
+      ],
+      "prompt" : "I'd rather learn a new move by trying it than by reading about it.",
+      "reversed" : false,
+      "scaleLabels" : [
+        "Strongly disagree",
+        "Disagree",
+        "Not sure",
+        "Agree",
+        "Strongly agree"
+      ],
+      "weights" : {
+        "physical" : 1
+      }
+    },
+    {
+      "id" : "ph2",
+      "instruction" : "How much do you agree?",
+      "kind" : "agreement",
+      "options" : [
+
+      ],
+      "prompt" : "I feel restless if I have to sit still for too long.",
+      "reversed" : false,
+      "scaleLabels" : [
+        "Strongly disagree",
+        "Disagree",
+        "Not sure",
+        "Agree",
+        "Strongly agree"
+      ],
+      "weights" : {
+        "physical" : 1
+      }
+    },
+    {
+      "id" : "ph3",
+      "instruction" : "How much do you agree?",
+      "kind" : "agreement",
+      "options" : [
+
+      ],
+      "prompt" : "I'm usually one of the clumsier people in a group.",
+      "reversed" : true,
+      "scaleLabels" : [
+        "Strongly disagree",
+        "Disagree",
+        "Not sure",
+        "Agree",
+        "Strongly agree"
+      ],
+      "weights" : {
+        "physical" : 1
+      }
+    },
+    {
+      "id" : "ph4",
+      "instruction" : "How easy is this for you?",
+      "kind" : "ability",
+      "options" : [
+
+      ],
+      "prompt" : "Catching a ball that's thrown to you unexpectedly",
+      "reversed" : false,
+      "scaleLabels" : [
+        "Very hard",
+        "Hard",
+        "About average",
+        "Easy",
+        "Very easy"
+      ],
+      "weights" : {
+        "physical" : 1
+      }
+    },
+    {
+      "id" : "ph5",
+      "instruction" : "How easy is this for you?",
+      "kind" : "ability",
+      "options" : [
+
+      ],
+      "prompt" : "Picking up a new sport or dance routine",
+      "reversed" : false,
+      "scaleLabels" : [
+        "Very hard",
+        "Hard",
+        "About average",
+        "Easy",
+        "Very easy"
+      ],
+      "weights" : {
+        "physical" : 1
+      }
+    },
+    {
+      "id" : "so1",
+      "instruction" : "How much do you agree?",
+      "kind" : "agreement",
+      "options" : [
+
+      ],
+      "prompt" : "Friends come to me when they need to talk something through.",
+      "reversed" : false,
+      "scaleLabels" : [
+        "Strongly disagree",
+        "Disagree",
+        "Not sure",
+        "Agree",
+        "Strongly agree"
+      ],
+      "weights" : {
+        "social" : 1
+      }
+    },
+    {
+      "id" : "so2",
+      "instruction" : "How much do you agree?",
+      "kind" : "agreement",
+      "options" : [
+
+      ],
+      "prompt" : "I can usually tell how someone feels before they say anything.",
+      "reversed" : false,
+      "scaleLabels" : [
+        "Strongly disagree",
+        "Disagree",
+        "Not sure",
+        "Agree",
+        "Strongly agree"
+      ],
+      "weights" : {
+        "social" : 1
+      }
+    },
+    {
+      "id" : "so3",
+      "instruction" : "How much do you agree?",
+      "kind" : "agreement",
+      "options" : [
+
+      ],
+      "prompt" : "I find it draining to help people with their problems.",
+      "reversed" : true,
+      "scaleLabels" : [
+        "Strongly disagree",
+        "Disagree",
+        "Not sure",
+        "Agree",
+        "Strongly agree"
+      ],
+      "weights" : {
+        "social" : 1
+      }
+    },
+    {
+      "id" : "so4",
+      "instruction" : "How easy is this for you?",
+      "kind" : "ability",
+      "options" : [
+
+      ],
+      "prompt" : "Making a nervous stranger feel at ease",
+      "reversed" : false,
+      "scaleLabels" : [
+        "Very hard",
+        "Hard",
+        "About average",
+        "Easy",
+        "Very easy"
+      ],
+      "weights" : {
+        "social" : 1
+      }
+    },
+    {
+      "id" : "so5",
+      "instruction" : "How easy is this for you?",
+      "kind" : "ability",
+      "options" : [
+
+      ],
+      "prompt" : "Calming down an argument between two people",
+      "reversed" : false,
+      "scaleLabels" : [
+        "Very hard",
+        "Hard",
+        "About average",
+        "Easy",
+        "Very easy"
+      ],
+      "weights" : {
+        "leadership" : 0.3,
+        "social" : 1
+      }
+    },
+    {
+      "id" : "le1",
+      "instruction" : "How much do you agree?",
+      "kind" : "agreement",
+      "options" : [
+
+      ],
+      "prompt" : "In a group with no plan, I'm usually the one who suggests one.",
+      "reversed" : false,
+      "scaleLabels" : [
+        "Strongly disagree",
+        "Disagree",
+        "Not sure",
+        "Agree",
+        "Strongly agree"
+      ],
+      "weights" : {
+        "leadership" : 1
+      }
+    },
+    {
+      "id" : "le2",
+      "instruction" : "How much do you agree?",
+      "kind" : "agreement",
+      "options" : [
+
+      ],
+      "prompt" : "I enjoy convincing people to see things my way.",
+      "reversed" : false,
+      "scaleLabels" : [
+        "Strongly disagree",
+        "Disagree",
+        "Not sure",
+        "Agree",
+        "Strongly agree"
+      ],
+      "weights" : {
+        "leadership" : 1,
+        "verbal" : 0.3
+      }
+    },
+    {
+      "id" : "le3",
+      "instruction" : "How much do you agree?",
+      "kind" : "agreement",
+      "options" : [
+
+      ],
+      "prompt" : "I'd rather someone else made the final call.",
+      "reversed" : true,
+      "scaleLabels" : [
+        "Strongly disagree",
+        "Disagree",
+        "Not sure",
+        "Agree",
+        "Strongly agree"
+      ],
+      "weights" : {
+        "leadership" : 1
+      }
+    },
+    {
+      "id" : "le4",
+      "instruction" : "How easy is this for you?",
+      "kind" : "ability",
+      "options" : [
+
+      ],
+      "prompt" : "Speaking in front of a room full of people",
+      "reversed" : false,
+      "scaleLabels" : [
+        "Very hard",
+        "Hard",
+        "About average",
+        "Easy",
+        "Very easy"
+      ],
+      "weights" : {
+        "leadership" : 1,
+        "verbal" : 0.3
+      }
+    },
+    {
+      "id" : "le5",
+      "instruction" : "How easy is this for you?",
+      "kind" : "ability",
+      "options" : [
+
+      ],
+      "prompt" : "Getting a team to agree on who does what",
+      "reversed" : false,
+      "scaleLabels" : [
+        "Very hard",
+        "Hard",
+        "About average",
+        "Easy",
+        "Very easy"
+      ],
+      "weights" : {
+        "leadership" : 1
+      }
+    },
+    {
+      "id" : "cr1",
+      "instruction" : "How much do you agree?",
+      "kind" : "agreement",
+      "options" : [
+
+      ],
+      "prompt" : "I often come up with ideas nobody else has thought of.",
+      "reversed" : false,
+      "scaleLabels" : [
+        "Strongly disagree",
+        "Disagree",
+        "Not sure",
+        "Agree",
+        "Strongly agree"
+      ],
+      "weights" : {
+        "creative" : 1
+      }
+    },
+    {
+      "id" : "cr2",
+      "instruction" : "How much do you agree?",
+      "kind" : "agreement",
+      "options" : [
+
+      ],
+      "prompt" : "I like making things — drawings, stories, recipes, outfits — just for fun.",
+      "reversed" : false,
+      "scaleLabels" : [
+        "Strongly disagree",
+        "Disagree",
+        "Not sure",
+        "Agree",
+        "Strongly agree"
+      ],
+      "weights" : {
+        "creative" : 1
+      }
+    },
+    {
+      "id" : "cr3",
+      "instruction" : "How much do you agree?",
+      "kind" : "agreement",
+      "options" : [
+
+      ],
+      "prompt" : "I'd rather follow clear instructions than make something up.",
+      "reversed" : true,
+      "scaleLabels" : [
+        "Strongly disagree",
+        "Disagree",
+        "Not sure",
+        "Agree",
+        "Strongly agree"
+      ],
+      "weights" : {
+        "creative" : 1
+      }
+    },
+    {
+      "id" : "cr4",
+      "instruction" : "How easy is this for you?",
+      "kind" : "ability",
+      "options" : [
+
+      ],
+      "prompt" : "Thinking of lots of different uses for an everyday object",
+      "reversed" : false,
+      "scaleLabels" : [
+        "Very hard",
+        "Hard",
+        "About average",
+        "Easy",
+        "Very easy"
+      ],
+      "weights" : {
+        "creative" : 1
+      }
+    },
+    {
+      "id" : "cr5",
+      "instruction" : "How easy is this for you?",
+      "kind" : "ability",
+      "options" : [
+
+      ],
+      "prompt" : "Sketching or designing something that looks good",
+      "reversed" : false,
+      "scaleLabels" : [
+        "Very hard",
+        "Hard",
+        "About average",
+        "Easy",
+        "Very easy"
+      ],
+      "weights" : {
+        "creative" : 1,
+        "spatial" : 0.3
+      }
+    },
+    {
+      "id" : "ha1",
+      "instruction" : "How much do you agree?",
+      "kind" : "agreement",
+      "options" : [
+
+      ],
+      "prompt" : "I like taking things apart to see how they work.",
+      "reversed" : false,
+      "scaleLabels" : [
+        "Strongly disagree",
+        "Disagree",
+        "Not sure",
+        "Agree",
+        "Strongly agree"
+      ],
+      "weights" : {
+        "handsOn" : 1
+      }
+    },
+    {
+      "id" : "ha2",
+      "instruction" : "How much do you agree?",
+      "kind" : "agreement",
+      "options" : [
+
+      ],
+      "prompt" : "I'd rather fix something myself than call someone in.",
+      "reversed" : false,
+      "scaleLabels" : [
+        "Strongly disagree",
+        "Disagree",
+        "Not sure",
+        "Agree",
+        "Strongly agree"
+      ],
+      "weights" : {
+        "handsOn" : 1
+      }
+    },
+    {
+      "id" : "ha3",
+      "instruction" : "How much do you agree?",
+      "kind" : "agreement",
+      "options" : [
+
+      ],
+      "prompt" : "I avoid tools and DIY whenever I can.",
+      "reversed" : true,
+      "scaleLabels" : [
+        "Strongly disagree",
+        "Disagree",
+        "Not sure",
+        "Agree",
+        "Strongly agree"
+      ],
+      "weights" : {
+        "handsOn" : 1
+      }
+    },
+    {
+      "id" : "ha4",
+      "instruction" : "How easy is this for you?",
+      "kind" : "ability",
+      "options" : [
+
+      ],
+      "prompt" : "Following a flat-pack furniture diagram without mistakes",
+      "reversed" : false,
+      "scaleLabels" : [
+        "Very hard",
+        "Hard",
+        "About average",
+        "Easy",
+        "Very easy"
+      ],
+      "weights" : {
+        "handsOn" : 1,
+        "spatial" : 0.3
+      }
+    },
+    {
+      "id" : "ha5",
+      "instruction" : "How easy is this for you?",
+      "kind" : "ability",
+      "options" : [
+
+      ],
+      "prompt" : "Working out why a machine or gadget has stopped working",
+      "reversed" : false,
+      "scaleLabels" : [
+        "Very hard",
+        "Hard",
+        "About average",
+        "Easy",
+        "Very easy"
+      ],
+      "weights" : {
+        "analytical" : 0.3,
+        "handsOn" : 1
+      }
+    },
+    {
+      "id" : "na1",
+      "instruction" : "How much do you agree?",
+      "kind" : "agreement",
+      "options" : [
+
+      ],
+      "prompt" : "I feel most like myself when I'm outdoors.",
+      "reversed" : false,
+      "scaleLabels" : [
+        "Strongly disagree",
+        "Disagree",
+        "Not sure",
+        "Agree",
+        "Strongly agree"
+      ],
+      "weights" : {
+        "nature" : 1
+      }
+    },
+    {
+      "id" : "na2",
+      "instruction" : "How much do you agree?",
+      "kind" : "agreement",
+      "options" : [
+
+      ],
+      "prompt" : "I notice birds, plants or insects that other people walk straight past.",
+      "reversed" : false,
+      "scaleLabels" : [
+        "Strongly disagree",
+        "Disagree",
+        "Not sure",
+        "Agree",
+        "Strongly agree"
+      ],
+      "weights" : {
+        "nature" : 1
+      }
+    },
+    {
+      "id" : "na3",
+      "instruction" : "How much do you agree?",
+      "kind" : "agreement",
+      "options" : [
+
+      ],
+      "prompt" : "Looking after plants or pets doesn't interest me.",
+      "reversed" : true,
+      "scaleLabels" : [
+        "Strongly disagree",
+        "Disagree",
+        "Not sure",
+        "Agree",
+        "Strongly agree"
+      ],
+      "weights" : {
+        "nature" : 1
+      }
+    },
+    {
+      "id" : "na4",
+      "instruction" : "How easy is this for you?",
+      "kind" : "ability",
+      "options" : [
+
+      ],
+      "prompt" : "Telling apart similar kinds of trees, birds or animals",
+      "reversed" : false,
+      "scaleLabels" : [
+        "Very hard",
+        "Hard",
+        "About average",
+        "Easy",
+        "Very easy"
+      ],
+      "weights" : {
+        "nature" : 1
+      }
+    },
+    {
+      "id" : "na5",
+      "instruction" : "How easy is this for you?",
+      "kind" : "ability",
+      "options" : [
+
+      ],
+      "prompt" : "Keeping plants or animals healthy and thriving",
+      "reversed" : false,
+      "scaleLabels" : [
+        "Very hard",
+        "Hard",
+        "About average",
+        "Easy",
+        "Very easy"
+      ],
+      "weights" : {
+        "nature" : 1
+      }
+    },
+    {
+      "id" : "ch1",
+      "instruction" : "Which would you pick?",
+      "kind" : "choice",
+      "options" : [
+        {
+          "text" : "Cracking a tricky escape-room puzzle",
+          "weights" : {
+            "analytical" : 1
+          }
+        },
+        {
+          "text" : "Hiking somewhere you've never been",
+          "weights" : {
+            "nature" : 1,
+            "physical" : 0.5
+          }
+        },
+        {
+          "text" : "Jamming with friends or going to a gig",
+          "weights" : {
+            "musical" : 1,
+            "social" : 0.3
+          }
+        },
+        {
+          "text" : "Building or repairing something in the garage",
+          "weights" : {
+            "handsOn" : 1
+          }
+        }
+      ],
+      "prompt" : "A free Saturday afternoon. Which sounds best?",
+      "reversed" : false,
+      "scaleLabels" : [
+
+      ],
+      "weights" : {
+
+      }
+    },
+    {
+      "id" : "ch2",
+      "instruction" : "Which would you pick?",
+      "kind" : "choice",
+      "options" : [
+        {
+          "text" : "Running the plan and the deadlines",
+          "weights" : {
+            "leadership" : 1
+          }
+        },
+        {
+          "text" : "Writing the report and the presentation",
+          "weights" : {
+            "verbal" : 1
+          }
+        },
+        {
+          "text" : "Designing how it all looks",
+          "weights" : {
+            "creative" : 0.7,
+            "spatial" : 0.5
+          }
+        },
+        {
+          "text" : "Keeping everyone happy and talking",
+          "weights" : {
+            "social" : 1
+          }
+        }
+      ],
+      "prompt" : "In a group project, you'd naturally take on…",
+      "reversed" : false,
+      "scaleLabels" : [
+
+      ],
+      "weights" : {
+
+      }
+    },
+    {
+      "id" : "ch3",
+      "instruction" : "Which would you pick?",
+      "kind" : "choice",
+      "options" : [
+        {
+          "text" : "A musical instrument",
+          "weights" : {
+            "musical" : 1
+          }
+        },
+        {
+          "text" : "A martial art or a dance style",
+          "weights" : {
+            "physical" : 1
+          }
+        },
+        {
+          "text" : "Coding or data analysis",
+          "weights" : {
+            "analytical" : 1
+          }
+        },
+        {
+          "text" : "Woodwork or electronics",
+          "weights" : {
+            "handsOn" : 1
+          }
+        }
+      ],
+      "prompt" : "Which would you most like to learn this year?",
+      "reversed" : false,
+      "scaleLabels" : [
+
+      ],
+      "weights" : {
+
+      }
+    },
+    {
+      "id" : "ch4",
+      "instruction" : "Which would you pick?",
+      "kind" : "choice",
+      "options" : [
+        {
+          "text" : "Outdoors, whatever the weather",
+          "weights" : {
+            "nature" : 1,
+            "physical" : 0.3
+          }
+        },
+        {
+          "text" : "A workshop full of tools",
+          "weights" : {
+            "handsOn" : 1
+          }
+        },
+        {
+          "text" : "A studio full of materials",
+          "weights" : {
+            "creative" : 1,
+            "spatial" : 0.3
+          }
+        },
+        {
+          "text" : "A busy room full of people",
+          "weights" : {
+            "leadership" : 0.7,
+            "social" : 0.5
+          }
+        }
+      ],
+      "prompt" : "Your ideal place to spend a working day…",
+      "reversed" : false,
+      "scaleLabels" : [
+
+      ],
+      "weights" : {
+
+      }
+    },
+    {
+      "id" : "ch5",
+      "instruction" : "Which would you pick?",
+      "kind" : "choice",
+      "options" : [
+        {
+          "text" : "“You're so sharp — you figured it out!”",
+          "weights" : {
+            "analytical" : 1
+          }
+        },
+        {
+          "text" : "“You're a brilliant writer.”",
+          "weights" : {
+            "verbal" : 1
+          }
+        },
+        {
+          "text" : "“You've got a great eye.”",
+          "weights" : {
+            "creative" : 0.5,
+            "spatial" : 0.7
+          }
+        },
+        {
+          "text" : "“You always know what to say to people.”",
+          "weights" : {
+            "social" : 1
+          }
+        }
+      ],
+      "prompt" : "Which compliment would mean the most to you?",
+      "reversed" : false,
+      "scaleLabels" : [
+
+      ],
+      "weights" : {
+
+      }
+    },
+    {
+      "id" : "ch6",
+      "instruction" : "Which would you pick?",
+      "kind" : "choice",
+      "options" : [
+        {
+          "text" : "The science and engineering hall",
+          "weights" : {
+            "analytical" : 0.5,
+            "handsOn" : 0.7
+          }
+        },
+        {
+          "text" : "The natural history wing",
+          "weights" : {
+            "nature" : 1
+          }
+        },
+        {
+          "text" : "The art gallery",
+          "weights" : {
+            "creative" : 0.7,
+            "spatial" : 0.5
+          }
+        },
+        {
+          "text" : "The history of music exhibition",
+          "weights" : {
+            "musical" : 1
+          }
+        }
+      ],
+      "prompt" : "At a big museum, you head first to…",
+      "reversed" : false,
+      "scaleLabels" : [
+
+      ],
+      "weights" : {
+
+      }
+    },
+    {
+      "id" : "ch7",
+      "instruction" : "Which would you pick?",
+      "kind" : "choice",
+      "options" : [
+        {
+          "text" : "Public speaking and negotiation",
+          "weights" : {
+            "leadership" : 1
+          }
+        },
+        {
+          "text" : "Creative writing",
+          "weights" : {
+            "creative" : 0.5,
+            "verbal" : 0.7
+          }
+        },
+        {
+          "text" : "Rock climbing",
+          "weights" : {
+            "nature" : 0.3,
+            "physical" : 1
+          }
+        },
+        {
+          "text" : "Wildlife photography",
+          "weights" : {
+            "nature" : 1,
+            "spatial" : 0.3
+          }
+        }
+      ],
+      "prompt" : "Pick a weekend course:",
+      "reversed" : false,
+      "scaleLabels" : [
+
+      ],
+      "weights" : {
+
+      }
+    },
+    {
+      "id" : "ch8",
+      "instruction" : "Which would you pick?",
+      "kind" : "choice",
+      "options" : [
+        {
+          "text" : "Make a list of pros and cons, or a spreadsheet",
+          "weights" : {
+            "analytical" : 1
+          }
+        },
+        {
+          "text" : "Talk it through with someone",
+          "weights" : {
+            "social" : 1,
+            "verbal" : 0.3
+          }
+        },
+        {
+          "text" : "Sketch it out or picture it in your head",
+          "weights" : {
+            "spatial" : 1
+          }
+        },
+        {
+          "text" : "Just start trying things with your hands",
+          "weights" : {
+            "handsOn" : 0.7,
+            "physical" : 0.3
+          }
+        }
+      ],
+      "prompt" : "When you have a hard problem to solve, you'd rather…",
+      "reversed" : false,
+      "scaleLabels" : [
+
+      ],
+      "weights" : {
+
+      }
+    },
+    {
+      "id" : "ch9",
+      "instruction" : "Which would you pick?",
+      "kind" : "choice",
+      "options" : [
+        {
+          "text" : "Film director",
+          "weights" : {
+            "creative" : 0.7,
+            "leadership" : 0.5
+          }
+        },
+        {
+          "text" : "Park ranger",
+          "weights" : {
+            "nature" : 1
+          }
+        },
+        {
+          "text" : "Personal trainer",
+          "weights" : {
+            "physical" : 1,
+            "social" : 0.3
+          }
+        },
+        {
+          "text" : "Sound engineer at a concert",
+          "weights" : {
+            "handsOn" : 0.3,
+            "musical" : 1
+          }
+        }
+      ],
+      "prompt" : "Which job-for-a-day sounds the most fun?",
+      "reversed" : false,
+      "scaleLabels" : [
+
+      ],
+      "weights" : {
+
+      }
+    },
+    {
+      "id" : "ch10",
+      "instruction" : "Which would you pick?",
+      "kind" : "choice",
+      "options" : [
+        {
+          "text" : "Settle a debate with the facts",
+          "weights" : {
+            "analytical" : 0.7,
+            "verbal" : 0.3
+          }
+        },
+        {
+          "text" : "Organise the group trip",
+          "weights" : {
+            "leadership" : 1
+          }
+        },
+        {
+          "text" : "Make the playlist",
+          "weights" : {
+            "musical" : 1
+          }
+        },
+        {
+          "text" : "Look after their pet or plants while they're away",
+          "weights" : {
+            "nature" : 1,
+            "social" : 0.3
+          }
+        }
+      ],
+      "prompt" : "Your friends would most likely ask you to…",
+      "reversed" : false,
+      "scaleLabels" : [
+
+      ],
+      "weights" : {
+
+      }
+    }
+  ]
+}

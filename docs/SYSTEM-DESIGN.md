@@ -1,6 +1,6 @@
 # System Design
 
-TalentFinder is a native macOS app (SwiftUI, macOS 14+). The user answers a 60-question survey, and the app scores ten aptitudes and ranks 47 activities by how well they fit. Everything runs and stays on the Mac. There is no network access, no account and no API key.
+TalentFinder comes as a native macOS app (SwiftUI, macOS 14+) and as a static website. In both, the user answers a 60-question survey, and the app scores ten aptitudes and ranks 47 activities by how well they fit. Everything runs and stays on the user's device. There is no server, no account and no API key. The Swift package is the single source of truth: the website loads JSON exported from it, and its scorer is a port that is tested to give identical results.
 
 ## Architecture
 
@@ -33,6 +33,20 @@ flowchart TB
     AM --> SC
     SC --> QB & AC
     AM --> ST --> FS
+
+    subgraph Web["Website (web/, static, GitHub Pages)"]
+        JA[app.js<br/>screens, keys, settings, feedback]
+        JS[scoring.js<br/>port of Scorer]
+        SJ[(data/survey.json)]
+        LS[(localStorage)]
+    end
+    EX[ExportWebData<br/>swift run] --> SJ
+    EX --> FX[(tests/fixtures.json)]
+    Core --> EX
+    JA --> JS --> SJ
+    JA --> LS
+    JA -. feedback .-> GH[GitHub new-issue page]
+    FX -. parity test .-> JS
 ```
 
 ## Components
@@ -46,6 +60,10 @@ flowchart TB
 | `Store` | Reads and writes the progress, result and feedback JSON files in one folder. Tests point it at a temporary folder. |
 | `AppModel` | `@Observable` app state. It tracks the current screen, the survey in progress and the latest result. It starts, answers, moves, finishes and resets the survey, saves after every change and saves feedback. |
 | Views | Welcome (start or resume), Survey (one question at a time, keys 1–5, arrow keys), Results (Swift Charts bar chart, strengths, filterable activity list), Settings (⌘,), and Feedback (a sheet opened from the corner tab, the Help menu or Settings). |
+| `WebExport` / `ExportWebData` | Encodes the aptitudes, questions and activities as `web/data/survey.json`. Also scores 21 answer sets (one favouring each aptitude, neutral, partial, invalid, empty and six seeded random sets) with the Swift `Scorer` and writes them to `web/tests/fixtures.json`. |
+| `web/js/scoring.js` | A line-for-line port of `Scorer`, with the same loop order, arithmetic and tie-breaks, so the floating-point results are bit-identical. It also creates new (optionally shuffled) survey progress. |
+| `web/js/app.js` | The website: the same three screens as the Mac app, rendered from templates, plus keyboard handling, a Settings dialog (gear button or ⌘/Ctrl+,), the Feedback tab, and guarded `localStorage` persistence. |
+| `.github/workflows/website.yml` | On pushes to `web/`, runs the parity tests, then publishes `web/` to GitHub Pages. |
 
 ## Main flows
 
@@ -63,7 +81,11 @@ The result is saved as `Latest Result.json` and the progress file is deleted.
 
 **Settings.** The values are `@AppStorage` in UserDefaults, read when they matter: shuffle when a survey starts, auto-advance on each answer, and the activity count when results are drawn. Reset deletes the progress and result files and keeps feedback.
 
-**Feedback.** The sheet appends `{date, kind, message}` to `Feedback.json`. Nothing is transmitted.
+**Feedback.** In the Mac app, the sheet appends `{date, kind, message}` to `Feedback.json`. Nothing is transmitted. On the website, the dialog opens `github.com/amalmehta/TalentFinder/issues/new`, with the title (`[Kind] first line`) and body filled in. The visitor reviews and submits it from their own GitHub account, so the site never sends anything itself.
+
+**Website.** The page loads `data/survey.json`, then renders the welcome, survey or results screen. Progress, the latest result and settings live in `localStorage` under `talentfinder.*` keys. Every read and write is wrapped so the site still works, in memory only, when storage is blocked. Saved progress that refers to questions that no longer exist is dropped on load.
+
+**Keeping the two in step.** When the questions or activities change, run `swift run ExportWebData` to regenerate both JSON files. `swift test` fails if the committed files differ from what the Swift code would produce. `node --test web/tests/scoring.test.mjs` fails if the JS scorer's output differs from the Swift fixtures at all; the comparison is exact, not within a tolerance.
 
 ## Where data lives
 
@@ -73,7 +95,9 @@ The result is saved as `Latest Result.json` and the progress file is deleted.
 | Latest result | `~/Library/Application Support/TalentFinder/Latest Result.json` |
 | Feedback | `~/Library/Application Support/TalentFinder/Feedback.json` |
 | Preferences | UserDefaults domain `com.amalmehta.TalentFinder` |
-| Questions and activities | Compiled into the app (`QuestionBank.swift`, `Activity.swift`) |
+| Questions and activities | Compiled into the app (`QuestionBank.swift`, `Activity.swift`), and exported to `web/data/survey.json` for the website |
+| Website progress, result, settings | The visitor's browser `localStorage` (`talentfinder.progress`, `.result`, `.settings`) |
+| Website feedback | GitHub Issues on amalmehta/TalentFinder, if the visitor submits it |
 
 ## Key decisions and trade-offs
 
@@ -84,17 +108,30 @@ The result is saved as `Latest Result.json` and the progress file is deleted.
 - **JSON files instead of SwiftData or Core Data.** The data is tiny, the files are readable, and there is no migration work. Only the latest result is kept.
 - **XcodeGen with the generated project committed.** `project.yml` is the source of truth, but the `.xcodeproj` is committed so XcodeGen isn't needed just to build.
 - **A Window scene instead of WindowGroup.** The app has a single main window, so ⌘N means "New Survey" rather than "new window".
+- **A plain static website instead of a framework or SwiftWasm.** There are no dependencies and no build step, the page loads fast, and it can be hosted anywhere. The cost is a second scorer to maintain, which the exported data and exact parity tests keep honest.
+- **Exported JSON instead of copying the questions into JS.** Questions and activities are defined once, in Swift, and the website can't drift from the Mac app without a test failing.
+- **Deterministic scoring order.** The Swift scorer walks aptitudes in a fixed order rather than dictionary order, and breaks ties by position. That makes results identical on every run and lets the JS port match them exactly.
+- **GitHub issues for website feedback.** It needs no backend and puts no email address on the page, and nothing is sent without the visitor's say. The cost is that a visitor needs a GitHub account to send feedback.
 
 ## How it's tested
 
-- **Unit tests** (`swift test`, 16 tests):
+- **Unit tests** (`swift test`, 19 tests):
   - Question bank: 60 unique ids; five primary items and one reverse-keyed item per aptitude; every aptitude appears in at least three choice items; every aptitude has a matching activity.
   - Scorer: maxing out each aptitude ranks it first; reverse-keyed items work; all-neutral answers score 50; invalid answers are ignored; choices give full credit and evidence; matches follow strengths; quotes aren't doubled.
   - Store: progress and result round trips; reset keeps feedback; a shuffled order still covers every question.
+  - Web export: the committed `survey.json` and `fixtures.json` are current; scoring is deterministic.
+- **Website parity tests** (`node --test web/tests/scoring.test.mjs`, 24 tests): the JS scorer exactly matches all 21 Swift fixtures (scores, evidence, activity order, fits and reasons); it rejects invalid answers; a shuffled survey covers every question. These also run in CI before each deploy.
 - **Manual end-to-end run** of the built app, driven in the background through accessibility automation:
   - starting a survey and answering by click and by keyboard, with auto-advance
   - resuming a saved survey and finishing it to see the results
   - Settings from the menu, and saving feedback (checked in `Feedback.json`)
+- **Website end-to-end checks** in a browser, driving the real page's buttons and key handlers:
+  - start, answer by click and by keyboard, go back, finish
+  - results render, and the category filter works
+  - settings save and apply; ⌘, opens Settings
+  - the feedback link has the right title and body
+  - resume works after a reload; reset clears progress and result but keeps settings
+- **Visual checks** with headless Chrome, in light and dark mode at 1100 px and at phone width (390 px), with no horizontal overflow.
 
 ## Known limits
 
@@ -102,6 +139,8 @@ The result is saved as `Latest Result.json` and the progress file is deleted.
 - Only the latest result is kept. There is no history or comparison over time.
 - There is no export or sharing of results.
 - English only. The text is hard-coded rather than localised.
-- Feedback stays on the Mac. Someone has to open `Feedback.json` to read it.
+- Feedback from the Mac app stays on the Mac; someone has to open `Feedback.json` to read it. Feedback from the website needs a GitHub account.
 - The app is ad-hoc signed and not notarised, so other Macs will show a Gatekeeper warning.
-- There is no website version yet. It's planned as a separate step.
+- Results on the website live in one browser only and don't sync with the Mac app.
+- In some browsers ⌘, opens the browser's own settings instead of TalentFinder's; the gear button always works.
+- The website needs JavaScript and must be served over HTTP. Opening `index.html` from disk won't load the survey.

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TalentFinder</title>
+  <meta name="description" content="Find out what you're naturally good at with a 60-question survey, and see the activities that suit you.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="js/app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <button class="brand" id="home-button" type="button" aria-label="TalentFinder home">
+      <span class="brand-mark" aria-hidden="true">✦</span> TalentFinder
+    </button>
+    <button class="icon-button" id="settings-button" type="button" aria-label="Settings" title="Settings (⌘, or Ctrl+,)">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M19.4 13a7.6 7.6 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.4 7.4 0 0 0-1.7-1L15 3.5h-4l-.4 2.5a7.4 7.4 0 0 0-1.7 1l-2.4-1-2 3.4 2 1.6a7.6 7.6 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7.4 7.4 0 0 0 1.7 1l.4 2.5h4l.4-2.5a7.4 7.4 0 0 0 1.7-1l2.4 1 2-3.4zM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z" transform="translate(-1 0)"/></svg>
+    </button>
+  </header>
+
+  <main id="app" tabindex="-1">
+    <p class="loading">Loading…</p>
+  </main>
+
+  <button class="feedback-tab" id="feedback-button" type="button">💬 Feedback</button>
+
+  <dialog id="settings-dialog" aria-labelledby="settings-title">
+    <form method="dialog" class="sheet">
+      <h2 id="settings-title">Settings</h2>
+      <fieldset>
+        <legend>Survey</legend>
+        <label class="row"><span>Shuffle question order<small>Applies the next time you start a survey.</small></span>
+          <input type="checkbox" id="pref-shuffle" class="switch"></label>
+        <label class="row"><span>Move to the next question after answering</span>
+          <input type="checkbox" id="pref-autoadvance" class="switch"></label>
+      </fieldset>
+      <fieldset>
+        <legend>Results</legend>
+        <label class="row"><span>Activities to show</span>
+          <select id="pref-topcount"><option>5</option><option>10</option><option>15</option><option>25</option></select></label>
+      </fieldset>
+      <fieldset>
+        <legend>Your data</legend>
+        <div class="row"><span>Saved in this browser only<small>Nothing you answer is sent anywhere.</small></span>
+          <button type="button" class="danger" id="reset-button">Reset…</button></div>
+      </fieldset>
+      <fieldset>
+        <legend>Feedback</legend>
+        <div class="row"><span>Ideas, bugs, questions</span>
+          <button type="button" id="settings-feedback-button">Send Feedback…</button></div>
+      </fieldset>
+      <div class="actions"><button value="close" class="primary">Done</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="feedback-dialog" aria-labelledby="feedback-title">
+    <form method="dialog" class="sheet" id="feedback-form">
+      <h2 id="feedback-title">Send Feedback</h2>
+      <div class="segmented" role="radiogroup" aria-label="Type">
+        <label><input type="radio" name="kind" value="Idea" checked><span>Idea</span></label>
+        <label><input type="radio" name="kind" value="Bug"><span>Bug</span></label>
+        <label><input type="radio" name="kind" value="Question"><span>Question</span></label>
+        <label><input type="radio" name="kind" value="Other"><span>Other</span></label>
+      </div>
+      <label class="visually-hidden" for="feedback-message">Message</label>
+      <textarea id="feedback-message" rows="6" placeholder="What's on your mind?"></textarea>
+      <p class="hint">Opens a pre-filled issue on GitHub. You review it and submit it from your own account.</p>
+      <div class="actions">
+        <button value="cancel" formnovalidate>Cancel</button>
+        <button type="button" class="primary" id="feedback-send" disabled>Open on GitHub</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="confirm-dialog" aria-labelledby="confirm-title">
+    <form method="dialog" class="sheet">
+      <h2 id="confirm-title">Delete your saved answers and results?</h2>
+      <p>This can't be undone.</p>
+      <div class="actions">
+        <button value="cancel">Cancel</button>
+        <button type="button" class="danger-fill" id="confirm-delete">Delete</button>
+      </div>
+    </form>
+  </dialog>
+</body>
+</html>

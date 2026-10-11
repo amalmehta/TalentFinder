@@ -9,6 +9,7 @@ let package = Package(
     ],
     targets: [
         .target(name: "TalentFinderCore"),
+        .executableTarget(name: "ExportWebData", dependencies: ["TalentFinderCore"]),
         .testTarget(name: "TalentFinderCoreTests", dependencies: ["TalentFinderCore"])
     ]
 )

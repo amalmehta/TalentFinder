@@ -65,8 +65,18 @@ Decided without asking:
 - Settings: shuffle questions, auto-advance, number of activities shown, show the data folder, and reset data.
 - Data is saved as JSON in ~/Library/Application Support/TalentFinder.
 
+Website (asked and answered 2026-10-11):
+- Plain static site (HTML, CSS, JS) in `web/`, with no build step and no dependencies.
+- Swift stays the single source of truth. `swift run ExportWebData` writes the survey JSON and the parity fixtures, and the JS scorer must match Swift exactly.
+- Hosted on GitHub Pages from this repo, deployed by a GitHub Actions workflow.
+- Website feedback opens a pre-filled GitHub issue.
+
+Website decisions made without asking:
+- Made the Swift scorer's iteration order and tie-breaks deterministic, which was needed for exact parity. Mac app results are unchanged.
+- Aptitude icons on the web are emoji, because SF Symbols don't exist there; colours match the Mac app.
+- Website settings are the same as the Mac app's minus "Show in Finder", with a gear button plus ⌘/Ctrl+,.
+
 Proposals (not done):
-- A website version, as its own step.
 - Result history and comparison over time.
 - Exporting results to PDF or Markdown.
 - An app icon, plus signing and notarisation for distribution.
@@ -93,3 +103,4 @@ CHANGELOG:
 - 2026-10-06 — built v1 of the Mac app (60-question survey, ten aptitudes, activity matches, Settings, feedback tab), with tests, docs and screenshots
 - 2026-10-07 — pushed to GitHub as a private repo: https://github.com/amalmehta/TalentFinder
 - 2026-10-11 — made the GitHub repo public
+- 2026-10-11 — built the website version (web/), with JSON exported from Swift, exact JS↔Swift parity tests, and GitHub Pages deployment
