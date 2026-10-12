@@ -194,6 +194,22 @@ select { background: var(--surface-2); border: 1px solid var(--border); border-r
 .badge { font-size: 0.72rem; font-weight: 650; padding: 1px 7px; border-radius: 999px; background: var(--accent-soft); margin-left: 6px; }
 .row-buttons { display: flex; gap: 8px; margin-left: auto; }
 
+/* Export menu */
+.menu { position: relative; }
+.menu summary {
+  list-style: none; cursor: pointer; border: 1px solid var(--border); background: var(--surface-2);
+  border-radius: 8px; padding: 6px 14px;
+}
+.menu summary::-webkit-details-marker { display: none; }
+.menu summary::after { content: " ▾"; font-size: 0.8em; color: var(--muted); }
+.menu-items {
+  position: absolute; right: 0; top: calc(100% + 4px); z-index: 4; display: grid; min-width: 190px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 4px; box-shadow: var(--shadow);
+}
+.menu-items button { border: none; background: none; text-align: left; padding: 8px 10px; border-radius: 6px; }
+.menu-items button:hover { background: var(--accent-soft); }
+.print-only { display: none; }
+
 /* Feedback tab */
 .feedback-tab {
   position: fixed; right: 16px; bottom: 14px; z-index: 6;
@@ -243,4 +259,22 @@ textarea { width: 100%; resize: vertical; background: var(--bg); border: 1px sol
   .survey-footer > .center { grid-column: 1 / -1; grid-row: 1; justify-self: center; }
   .results-head h1 { font-size: 1.7rem; }
   .trend text { font-size: 22px; }
+}
+
+/* Printing (Export ▸ Save as PDF): just the result, light, without controls */
+@media print {
+  :root {
+    --bg: #fff; --surface: #fff; --surface-2: #f1f1f4; --text: #111; --muted: #555; --faint: #888; --border: #ddd;
+    color-scheme: light;
+  }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { background: #fff; }
+  .topbar, .feedback-tab, .banner, .head-buttons, .activities-head select, dialog { display: none !important; }
+  .print-only { display: block; }
+  .print-brand { margin: 0 0 -14px; font-weight: 650; color: var(--accent); }
+  main { max-width: none; padding: 0; }
+  .results { gap: 22px; }
+  .strength, .activity, .bar-row { break-inside: avoid; }
+  h2 { break-after: avoid; }
+  @page { margin: 16mm; }
 }

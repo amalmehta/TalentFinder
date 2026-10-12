@@ -37,7 +37,7 @@ swift test
 The website's scorer is checked against the Swift one (needs Node 18 or later):
 
 ```bash
-node --test web/tests/scoring.test.mjs web/tests/history.test.mjs
+node --test web/tests/scoring.test.mjs web/tests/history.test.mjs web/tests/export.test.mjs
 ```
 
 ## Use it
@@ -51,6 +51,17 @@ node --test web/tests/scoring.test.mjs web/tests/history.test.mjs
    - the activities that suit you best, which you can filter by category
 5. **Retake Survey** or **File ▸ New Survey** (⌘N) starts again. Every result you finish is kept.
 6. After a retake, small ▲▼ numbers next to each score show how much it moved since your previous result.
+
+## Export a result
+
+On the results screen, use **Export ▸ PDF…** or **Export ▸ Markdown…**, or **File ▸ Export as PDF…** (⌘E) and **File ▸ Export as Markdown…** (⇧⌘E). Choose where to save; the suggested name is like `TalentFinder Results 2026-10-11`.
+
+The export is whichever result is on screen, the latest or a past one you opened. It includes:
+- all ten scores, with the change since the result before it if there is one
+- your top three strengths and the answers behind them
+- your top activities; how many follows **Activities to show** in Settings
+
+The PDF is an A4 report that's easy to print or share. The Markdown is plain text with tables, for notes apps and documents.
 
 ## Past results
 
@@ -90,6 +101,7 @@ Click the small **Feedback** tab in the bottom-right corner, or use **Help ▸ S
 - **Settings:** the gear button in the top right. ⌘, (Ctrl+, on Windows and Linux) also works, unless your browser keeps that shortcut for its own settings.
 - **Feedback:** the small **Feedback** tab in the bottom-right corner opens a pre-filled GitHub issue for you to review and submit.
 - **Past results:** the clock button in the top bar. It works the same as in the Mac app: a trend chart with aptitude chips, and a list of results to open or delete.
+- **Export:** on the results screen, **Export ▸ Download Markdown** saves a `.md` file with the same content as the Mac app's export. **Export ▸ Save as PDF…** opens your browser's print dialog; choose **Save as PDF** as the destination. The page is laid out as a clean, light report when printed.
 - **Reset:** Settings ▸ Reset… deletes the answers and all past results saved in this browser.
 
 ### Run it locally

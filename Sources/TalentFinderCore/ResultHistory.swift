@@ -15,6 +15,11 @@ public enum ResultHistory {
         history.map { ($0.completedAt, $0.score(for: aptitude)) }
     }
 
+    /// The result completed just before `result`, if any.
+    public static func previous(to result: SurveyResult, in history: [SurveyResult]) -> SurveyResult? {
+        history.last { $0.completedAt < result.completedAt }
+    }
+
     /// How much each aptitude moved between the two most recent results, or nil with fewer than two.
     public static func latestChange(in history: [SurveyResult]) -> [Aptitude: Double]? {
         guard history.count >= 2 else { return nil }

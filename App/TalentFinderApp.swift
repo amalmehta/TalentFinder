@@ -17,6 +17,14 @@ struct TalentFinderApp: App {
                 Button("New Survey") { model.startNew() }
                     .keyboardShortcut("n")
             }
+            CommandGroup(replacing: .importExport) {
+                Button("Export as PDF…") { model.export(.pdf) }
+                    .keyboardShortcut("e")
+                    .disabled(!model.canExport)
+                Button("Export as Markdown…") { model.export(.markdown) }
+                    .keyboardShortcut("e", modifiers: [.command, .shift])
+                    .disabled(!model.canExport)
+            }
             CommandGroup(after: .help) {
                 Button("Send Feedback…") { model.showingFeedback = true }
             }

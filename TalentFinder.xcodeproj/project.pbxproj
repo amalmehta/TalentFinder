@@ -16,6 +16,7 @@
 		9268CEDA5DEAE077B072C7B6 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80566D4651DA4D44DCE91DA2 /* SettingsView.swift */; };
 		A20B775EEE1B47AC9FD6182B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6083A8C9373DEAE7D4EE601D /* ContentView.swift */; };
 		B6E2AFBFBAFAE7F2A1F883BC /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6C1A88514BA6B8D989A4D8 /* ResultsView.swift */; };
+		D31D4B6916BE08AD48AD60ED /* ReportPDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FBFFD8DD0F3D510D5936F /* ReportPDF.swift */; };
 		DDDB8249FA56A441BD28119E /* TalentFinderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A880E6AE43EC04BAACA4FC1 /* TalentFinderApp.swift */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 		7A880E6AE43EC04BAACA4FC1 /* TalentFinderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalentFinderApp.swift; sourceTree = "<group>"; };
 		80566D4651DA4D44DCE91DA2 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		9A2E8B2CD991CC7542A3C400 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		9F3FBFFD8DD0F3D510D5936F /* ReportPDF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportPDF.swift; sourceTree = "<group>"; };
 		C52E8B6C4E9E710CD31925CE /* SurveyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyView.swift; sourceTree = "<group>"; };
 		E5C789E4B3E7A334BE8C0FDF /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		EA6C1A88514BA6B8D989A4D8 /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				6083A8C9373DEAE7D4EE601D /* ContentView.swift */,
 				3AFA19D567ABF5D56362E9A6 /* FeedbackView.swift */,
 				F4880D0BE41B0FF8016C0F40 /* HistoryView.swift */,
+				9F3FBFFD8DD0F3D510D5936F /* ReportPDF.swift */,
 				EA6C1A88514BA6B8D989A4D8 /* ResultsView.swift */,
 				80566D4651DA4D44DCE91DA2 /* SettingsView.swift */,
 				C52E8B6C4E9E710CD31925CE /* SurveyView.swift */,
@@ -153,6 +156,7 @@
 				A20B775EEE1B47AC9FD6182B /* ContentView.swift in Sources */,
 				407DE67AA2AF7E0F9DAA36D4 /* FeedbackView.swift in Sources */,
 				25EF8F18DD24D8C0573D808E /* HistoryView.swift in Sources */,
+				D31D4B6916BE08AD48AD60ED /* ReportPDF.swift in Sources */,
 				B6E2AFBFBAFAE7F2A1F883BC /* ResultsView.swift in Sources */,
 				9268CEDA5DEAE077B072C7B6 /* SettingsView.swift in Sources */,
 				7ACE83F363CC3DB26BB9CA21 /* SurveyView.swift in Sources */,

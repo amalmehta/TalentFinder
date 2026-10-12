@@ -43,6 +43,12 @@ struct ResultsView: View {
             if model.history.count > 1 {
                 Button("Past Results") { model.screen = .history }
             }
+            Menu("Export") {
+                Button("PDF…") { model.export(.pdf) }
+                Button("Markdown…") { model.export(.markdown) }
+            }
+            .fixedSize()
+            .help("Save this result as a PDF or Markdown file (⌘E, ⇧⌘E)")
             Button("Retake Survey") { model.startNew() }
         }
     }

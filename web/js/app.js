@@ -2,6 +2,7 @@
 // State lives in localStorage; nothing is sent anywhere.
 import { score, accepts, newProgress, isComplete } from "./scoring.js";
 import { adding, removing, latestChange, migrate } from "./history.js";
+import { markdown, fileName, previousTo, whole, SITE_URL } from "./export.js";
 
 const REPO_ISSUES = "https://github.com/amalmehta/TalentFinder/issues/new";
 
@@ -246,7 +247,7 @@ function renderResults() {
   const date = formatDate(r.completedAt);
   const change = isViewingLatest() ? latestChange(state.history, state.survey.aptitudes.map((a) => a.id)) : null;
   const delta = (id) => {
-    const d = Math.round(change?.[id] ?? 0);
+    const d = whole(change?.[id] ?? 0);
     return d ? `<span class="delta ${d > 0 ? "up" : "down"}" title="Change since your previous result">${d > 0 ? "▲" : "▼"}${Math.abs(d)}</span>` : "";
   };
 
@@ -288,6 +289,7 @@ function renderResults() {
 
   app.innerHTML = `
     <section class="results">
+      <p class="print-only print-brand">✦ TalentFinder results</p>
       ${isViewingLatest() ? "" : `<div class="banner" role="status">
         <span>🕘 You're looking at a past result from ${esc(date)}.</span>
         <button data-act="history">Back to Past Results</button>
@@ -297,6 +299,13 @@ function renderResults() {
         <div><h1>Your natural aptitudes</h1><p>Based on ${r.answeredCount} answers · ${esc(date)}</p></div>
         <div class="head-buttons">
           ${state.history.length > 1 ? `<button data-act="history">Past Results</button>` : ""}
+          <details class="menu">
+            <summary>Export</summary>
+            <div class="menu-items">
+              <button data-act="export-pdf">Save as PDF…</button>
+              <button data-act="export-md">Download Markdown</button>
+            </div>
+          </details>
           <button data-act="start">Retake Survey</button>
         </div>
       </div>
@@ -313,6 +322,7 @@ function renderResults() {
         </div>
         ${activities || `<p class="footnote">No activities in this category.</p>`}
         <p class="footnote" style="margin-top:14px">Fit is a weighted average of the aptitudes each activity draws on. It's a pointer for what to try, not a verdict.</p>
+        <p class="footnote print-only">Made with TalentFinder · ${esc(SITE_URL)}</p>
       </section>
     </section>`;
 }
@@ -368,11 +378,40 @@ function renderHistory() {
     </section>`;
 }
 
+// ---------- Export ----------
+
+/** Downloads the result on screen as Markdown, with the same text as the Mac app's export. */
+function exportMarkdown() {
+  const r = shownResult();
+  const previous = previousTo(r, state.history);
+  const text = markdown(r, state.survey, {
+    date: formatDate(r.completedAt),
+    previous,
+    previousDate: previous ? formatDate(previous.completedAt) : null,
+    activityCount: state.settings.topCount,
+  });
+  const url = URL.createObjectURL(new Blob([text], { type: "text/markdown;charset=utf-8" }));
+  const a = Object.assign(document.createElement("a"), { href: url, download: `${fileName(r)}.md` });
+  document.body.append(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+/** Opens the browser's print dialog; the print stylesheet turns the results page into a clean report. */
+function exportPDF() {
+  const before = document.title;
+  document.title = fileName(shownResult()); // browsers use the title as the suggested PDF name
+  window.addEventListener("afterprint", () => { document.title = before; }, { once: true });
+  window.print();
+}
+
 // ---------- Events ----------
 
 app.addEventListener("click", (e) => {
   const btn = e.target.closest("button");
   if (!btn) return;
+  btn.closest("details.menu")?.removeAttribute("open");
   if (btn.dataset.answer !== undefined) return answer(Number(btn.dataset.answer));
   if (btn.dataset.open) return openResult(btn.dataset.open);
   if (btn.dataset.delete) return deleteResult(btn.dataset.delete);
@@ -387,6 +426,8 @@ app.addEventListener("click", (e) => {
     resume: () => show("survey"),
     results: showLatest,
     history: () => show("history"),
+    "export-md": exportMarkdown,
+    "export-pdf": exportPDF,
     back: () => move(-1),
     next: () => move(1),
     finish,

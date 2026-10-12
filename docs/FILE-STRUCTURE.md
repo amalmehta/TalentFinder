@@ -16,10 +16,11 @@ TalentFinder/
 │   ├── QuestionBank.swift       All 60 survey questions and their weights
 │   ├── Activity.swift           Activity model and the catalog of 47 activities
 │   ├── Scoring.swift            Turns answers into scores, evidence and matches
-│   ├── ResultHistory.swift      Past results: add, remove, trend series, latest change
+│   ├── ResultHistory.swift      Past results: add, remove, previous, trend series, latest change
+│   ├── ResultExport.swift       Markdown export and file names
 │   ├── Store.swift              Progress, result history, feedback; JSON saving
-│   └── WebExport.swift          Builds the website's survey data and parity test cases
-├── Tests/TalentFinderCoreTests/ Unit tests: question bank, scoring, saving, history, web export
+│   └── WebExport.swift          Builds the website's survey data and parity/export test cases
+├── Tests/TalentFinderCoreTests/ Unit tests: question bank, scoring, saving, history, export
 ├── App/                         The SwiftUI Mac app
 │   ├── TalentFinderApp.swift    App entry point, window, menus, Settings scene
 │   ├── AppModel.swift           App state: screen, survey, result history
@@ -28,17 +29,19 @@ TalentFinder/
 │   ├── SurveyView.swift         One question at a time, with keyboard answers
 │   ├── ResultsView.swift        Chart (with change since last time), strengths, activities
 │   ├── HistoryView.swift        Past Results: trend chart, aptitude chips, list
+│   ├── ReportPDF.swift          Paginated A4 PDF report of one result
 │   ├── SettingsView.swift       Settings window (⌘,)
 │   └── FeedbackView.swift       Feedback sheet
 ├── web/                         The website (static, no build step)
 │   ├── index.html               Page shell; Settings, Feedback and confirm dialogs
-│   ├── styles.css               Light and dark themes, phone layout
+│   ├── styles.css               Light and dark themes, phone layout, print layout
 │   ├── favicon.svg              Tab icon
 │   ├── js/app.js                Screens, keyboard, settings, feedback, browser storage
 │   ├── js/scoring.js            Port of the Swift scorer
 │   ├── js/history.js            Port of ResultHistory, plus migrating old saved results
+│   ├── js/export.js             Port of ResultExport (Markdown, file names)
 │   ├── data/survey.json         Questions, activities and aptitudes (generated from Swift)
-│   └── tests/                   Parity and history tests; fixtures generated from Swift
+│   └── tests/                   Parity, history and export tests; fixtures generated from Swift
 └── docs/
     ├── INSTRUCTIONS.md          Setup, running and using the Mac app and website
     ├── SYSTEM-DESIGN.md         Architecture, flows, decisions, testing, limits
@@ -48,4 +51,4 @@ TalentFinder/
 
 Ignored by git: `build/` (Xcode output), `.build/` (SwiftPM output), `.claude/`.
 
-Generated, don't edit by hand: `web/data/survey.json` and `web/tests/fixtures.json`. Run `swift run ExportWebData` to regenerate them.
+Generated, don't edit by hand: `web/data/survey.json`, `web/tests/fixtures.json` and `web/tests/export-fixtures.json`. Run `swift run ExportWebData` to regenerate them.

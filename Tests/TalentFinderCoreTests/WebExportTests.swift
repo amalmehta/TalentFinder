@@ -15,6 +15,11 @@ final class WebExportTests: XCTestCase {
         XCTAssertEqual(committed, try WebExport.fixturesJSON(), "Run `swift run ExportWebData`")
     }
 
+    func testExportFixturesJSONIsCurrent() throws {
+        let committed = try Data(contentsOf: root.appendingPathComponent(WebExport.exportFixturesPath))
+        XCTAssertEqual(committed, try WebExport.exportFixturesJSON(), "Run `swift run ExportWebData`")
+    }
+
     func testScoringIsDeterministic() {
         let a = WebExport.answers(favoring: .creative)
         XCTAssertEqual(Scorer.score(answers: a, date: .distantPast), Scorer.score(answers: a, date: .distantPast))

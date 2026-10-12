@@ -6,6 +6,7 @@ public enum WebExport {
     /// Where the files go, relative to the repository root.
     public static let surveyPath = "web/data/survey.json"
     public static let fixturesPath = "web/tests/fixtures.json"
+    public static let exportFixturesPath = "web/tests/export-fixtures.json"
 
     struct AptitudeOut: Encodable { let id, name, summary: String }
     struct OptionOut: Encodable { let text: String; let weights: [String: Double] }
@@ -67,6 +68,48 @@ public enum WebExport {
             return Fixture(name: name, answers: answers, answeredCount: r.answeredCount,
                            scores: r.scores.map { ScoreOut(aptitude: $0.aptitude.rawValue, score: $0.score, evidence: $0.evidence) },
                            matches: r.matches.map { MatchOut(activity: $0.activity, category: $0.category, fit: $0.fit, reasons: $0.reasons.map(\.rawValue)) })
+        }
+        return try encode(fixtures)
+    }
+
+    struct ExportFixture: Encodable {
+        let name: String
+        let result: ResultOut
+        let previous: ResultOut?
+        let date: String
+        let previousDate: String?
+        let activityCount: Int
+        let markdown: String
+    }
+    struct ResultOut: Encodable {
+        let answeredCount: Int
+        let scores: [ScoreOut]
+        let matches: [MatchOut]
+    }
+
+    /// Markdown exports for a few cases, so the web version can be checked against the Swift one.
+    public static func exportFixturesJSON() throws -> Data {
+        func out(_ r: SurveyResult) -> ResultOut {
+            ResultOut(answeredCount: r.answeredCount,
+                      scores: r.scores.map { ScoreOut(aptitude: $0.aptitude.rawValue, score: $0.score, evidence: $0.evidence) },
+                      matches: r.matches.map { MatchOut(activity: $0.activity, category: $0.category, fit: $0.fit, reasons: $0.reasons.map(\.rawValue)) })
+        }
+        let creative = Scorer.score(answers: answers(favoring: .creative), date: Date(timeIntervalSince1970: 2_000_000))
+        let nature = Scorer.score(answers: answers(favoring: .nature), date: Date(timeIntervalSince1970: 1_000_000))
+        var rng = SplitMix64(seed: 7)
+        let random = Scorer.score(answers: Dictionary(uniqueKeysWithValues: QuestionBank.all.map { q in
+            (q.id, q.kind == .choice ? Int(rng.next() % 4) : Int(rng.next() % 5) + 1)
+        }), date: Date(timeIntervalSince1970: 3_000_000))
+        let cases: [(String, SurveyResult, SurveyResult?, Int)] = [
+            ("first result", creative, nil, 10),
+            ("with a previous result", creative, nature, 10),
+            ("random answers, few activities", random, creative, 5),
+            ("all activities", nature, nil, 100),
+        ]
+        let fixtures = cases.map { name, r, prev, count in
+            ExportFixture(name: name, result: out(r), previous: prev.map(out), date: "DATE", previousDate: prev == nil ? nil : "PREVIOUS DATE",
+                          activityCount: count,
+                          markdown: ResultExport.markdown(r, date: "DATE", previous: prev, previousDate: prev == nil ? nil : "PREVIOUS DATE", activityCount: count))
         }
         return try encode(fixtures)
     }

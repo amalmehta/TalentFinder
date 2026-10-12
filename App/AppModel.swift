@@ -1,5 +1,6 @@
 import SwiftUI
 import TalentFinderCore
+import UniformTypeIdentifiers
 
 /// Keys for the preferences shown in Settings.
 enum Pref {
@@ -121,6 +122,40 @@ final class AppModel {
         viewingID = nil
         screen = .welcome
     }
+
+    // MARK: Export
+
+    enum ExportFormat { case pdf, markdown }
+
+    /// Saves the result on screen as a PDF or Markdown file, asking where with a save panel.
+    func export(_ format: ExportFormat) {
+        guard let r = result else { return }
+        let previous = ResultHistory.previous(to: r, in: history)
+        let date = r.completedAt.formatted(date: .long, time: .shortened)
+        let previousDate = previous?.completedAt.formatted(date: .long, time: .shortened)
+        let count = UserDefaults.standard.integer(forKey: Pref.topCount)
+
+        let panel = NSSavePanel()
+        panel.canCreateDirectories = true
+        switch format {
+        case .pdf:
+            panel.allowedContentTypes = [.pdf]
+            panel.nameFieldStringValue = ResultExport.fileName(for: r) + ".pdf"
+        case .markdown:
+            panel.allowedContentTypes = [UTType("net.daringfireball.markdown") ?? .plainText]
+            panel.nameFieldStringValue = ResultExport.fileName(for: r) + ".md"
+        }
+        guard panel.runModal() == .OK, let url = panel.url else { return }
+
+        let data: Data = switch format {
+        case .pdf: ReportPDF.make(r, date: date, previous: previous, previousDate: previousDate, activityCount: count)
+        case .markdown: Data(ResultExport.markdown(r, date: date, previous: previous, previousDate: previousDate,
+                                                   activityCount: count).utf8)
+        }
+        do { try data.write(to: url, options: .atomic) } catch { errorMessage = error.localizedDescription }
+    }
+
+    var canExport: Bool { screen == .results && result != nil }
 
     func sendFeedback(kind: String, message: String) -> Bool {
         do {

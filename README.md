@@ -14,6 +14,10 @@ Find out what you're naturally good at. A 60-question survey scores ten aptitude
 |---|---|---|
 | ![Past results: how scores changed across retakes](docs/screenshots/Past%20Results.jpg) | ![Website past results in dark mode](docs/screenshots/Website%20Past%20Results.jpg) | ![Website survey on a phone](docs/screenshots/Website%20on%20a%20Phone.jpg) |
 
+Export any result as a PDF report or Markdown:
+
+![A three-page PDF export: scores with change since last time, top strengths, and matching activities](docs/screenshots/PDF%20Export.jpg)
+
 ```mermaid
 flowchart LR
     A[60 answers] --> B[Scorer] --> C[10 aptitude scores<br/>with evidence] --> D[Ranked activities]

@@ -86,8 +86,17 @@ Result history decisions made without asking:
 - The latest result also shows ▲▼ change since the previous one.
 - The trend chart spaces results evenly (#1, #2, …) instead of by calendar time, and starts with the latest top three aptitudes.
 
+Export (asked and answered 2026-10-11):
+- Both PDF and Markdown, in the Mac app and on the website.
+- An export contains the result on screen: scores with change since the previous result, top strengths with evidence, and top activities.
+
+Export decisions made without asking:
+- Mac: an Export menu on the results screen, plus File ▸ Export as PDF… (⌘E) and Export as Markdown… (⇧⌘E). Files are named like "TalentFinder Results 2026-10-11".
+- The Mac PDF is a purpose-built, always-light A4 report with page footers, not a copy of the window.
+- Website PDF uses the browser's print dialog ("Save as PDF") with a print stylesheet, so there's no PDF library to load.
+- The number of activities exported follows the "Activities to show" setting.
+
 Proposals (not done):
-- Exporting results to PDF or Markdown.
 - An app icon, plus signing and notarisation for distribution.
 
 CHANGELOG:
@@ -114,3 +123,4 @@ CHANGELOG:
 - 2026-10-11 — made the GitHub repo public
 - 2026-10-11 — built the website version (web/), with JSON exported from Swift, exact JS↔Swift parity tests, and GitHub Pages deployment
 - 2026-10-11 — added result history to the Mac app and website: past results list, trend chart, change since last time, delete; old saved results migrate automatically
+- 2026-10-11 — added exporting a result to PDF and Markdown in the Mac app and on the website
